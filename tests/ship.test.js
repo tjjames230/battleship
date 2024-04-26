@@ -8,10 +8,6 @@ describe("Ship", () => {
 		expect(newShip).toEqual({ length: 5, numberHit: 0 });
 	});
 
-	test("ship has constructor", () => {
-		expect(Ship.constructor).toBeDefined();
-	});
-
 	test("ship has been hit", () => {
 		newShip.hit();
 		expect(newShip.numberHit).toBe(1);
