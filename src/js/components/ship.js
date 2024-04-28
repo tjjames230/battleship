@@ -1,10 +1,15 @@
 class Ship {
-	constructor(length, numberHit = 0) {
+	constructor(length) {
 		this.length = length;
-		this.numberHit = numberHit;
+		this.numberHit = 0;
+		this.position = [
+			[0, 0],
+			[0, 1],
+			[0, 2],
+		];
 	}
 
-	hit() {
+	hit(x, y) {
 		this.numberHit++;
 	}
 
