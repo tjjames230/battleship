@@ -20,7 +20,12 @@ describe("Ship", () => {
 		expect(newShip.length > 1 && newShip.length < 6).toBe(true);
 	});
 
-	test("check ship is sunk when length = numberHit", () => {
-		expect(sunkShip.isSunk()).toBe(true);
+	test("testing place ship function", () => {
+		newShip.placeShip(2, 2, "vertical");
+		expect(newShip.getPosition).toBe([
+			[2, 2],
+			[3, 2],
+			[4, 2],
+		]);
 	});
 });
