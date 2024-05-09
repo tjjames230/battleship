@@ -8,7 +8,7 @@ describe("Ship", () => {
 	});
 
 	test("ship created test", () => {
-		expect(newShip).toEqual({ length: 3, numberHit: 0 });
+		expect(newShip).toEqual({ length: 3, numberHit: 0, position: [] });
 	});
 
 	test("ship has been hit", () => {
@@ -16,13 +16,13 @@ describe("Ship", () => {
 		expect(newShip.numberHit).toBe(1);
 	});
 
-	test("ensure ships created are greater than 1 and less than 6", () => {
+	test("ships created are greater than 1 and less than 6", () => {
 		expect(newShip.length > 1 && newShip.length < 6).toBe(true);
 	});
 
 	test("testing place ship function", () => {
-		newShip.placeShip(2, 2, "vertical");
-		expect(newShip.getPosition).toBe([
+		newShip.setPosition(2, 2, "vertical");
+		expect(newShip.getPosition()).toEqual([
 			[2, 2],
 			[3, 2],
 			[4, 2],

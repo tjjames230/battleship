@@ -2,11 +2,7 @@ class Ship {
 	constructor(length) {
 		this.length = length;
 		this.numberHit = 0;
-		this.position = [
-			[0, 0],
-			[0, 1],
-			[0, 2],
-		];
+		this.position = [];
 	}
 
 	hit(x, y) {
@@ -16,6 +12,26 @@ class Ship {
 	isSunk() {
 		if (this.length === this.numberHit) {
 			return true;
+		}
+	}
+
+	getPosition() {
+		return this.position;
+	}
+
+	setPosition(x, y, dir) {
+		if (dir === "horizontal") {
+			this.position = [
+				[x, y],
+				[x, y + 1],
+				[x, y + 2],
+			];
+		} else if (dir === "vertical") {
+			this.position = [
+				[x, y],
+				[x + 1, y],
+				[x + 2, y],
+			];
 		}
 	}
 }
