@@ -20,12 +20,17 @@ describe("Ship", () => {
 		expect(newShip.length > 1 && newShip.length < 6).toBe(true);
 	});
 
-	test("testing place ship function", () => {
+	test("test ship placement in bounds", () => {
 		newShip.setPosition(2, 2, "vertical");
 		expect(newShip.getPosition()).toEqual([
 			[2, 2],
 			[3, 2],
 			[4, 2],
 		]);
+	});
+
+	test("test ship placement out of bounds", () => {
+		newShip.setPosition(-1, 12, "horizontal");
+		expect(newShip.getPosition()).toEqual([]);
 	});
 });

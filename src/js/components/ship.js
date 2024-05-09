@@ -20,6 +20,11 @@ class Ship {
 	}
 
 	setPosition(x, y, dir) {
+		if (x > 9 || y > 9 || x < 0 || y < 0) {
+			console.log("invalid positions, try again");
+			return;
+		}
+
 		if (dir === "horizontal") {
 			this.position = [
 				[x, y],
