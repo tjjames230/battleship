@@ -1,42 +1,54 @@
 class Ship {
 	constructor(length) {
 		this.length = length;
-		this.numberHit = 0;
-		this.position = [];
+		this._numberHit = 0;
+		this._position = [];
 	}
 
 	hit(x, y) {
-		this.numberHit++;
+		this._numberHit++;
+	}
+
+	get numberHit() {
+		return this._numberHit;
 	}
 
 	isSunk() {
-		if (this.length === this.numberHit) {
+		if (this.length === this._numberHit) {
 			return true;
 		}
 	}
 
-	getPosition() {
-		return this.position;
+	get position() {
+		return this._position;
 	}
 
-	setPosition(x, y, dir) {
-		if (x > 9 || y > 9 || x < 0 || y < 0) {
+	set position(pos) {
+		// making sure the coordinates given are valid and do not exceed the board
+
+		if (pos.x < 0 || pos.y < 0) {
 			console.log("invalid positions, try again");
 			return;
 		}
 
-		if (dir === "horizontal") {
-			this.position = [
-				[x, y],
-				[x, y + 1],
-				[x, y + 2],
-			];
-		} else if (dir === "vertical") {
-			this.position = [
-				[x, y],
-				[x + 1, y],
-				[x + 2, y],
-			];
+		if (pos.dir === "horizontal") {
+			if (pos.x > 9 || pos.y + this.length - 1 > 9) {
+				console.log("invalid positions, try again");
+				return;
+			}
+
+			for (let i = 0; i < this.length; i++) {
+				this._position.push([pos.x, pos.y + i]);
+			}
+		} else if (pos.dir === "vertical") {
+			if (pos.x + this.length - 1 > 9 || pos.y > 9) {
+				console.log("invalid positions, try again");
+				return;
+			}
+
+			for (let i = 0; i < this.length; i++) {
+				this._position.push([pos.x + i, pos.y]);
+			}
 		}
 	}
 }
