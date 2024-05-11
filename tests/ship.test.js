@@ -18,7 +18,17 @@ describe("Ship", () => {
 	test("ship has been hit", () => {
 		ship1.position = { x: 2, y: 2, dir: "vertical" };
 		ship1.hit(3, 2);
-		expect(ship1.numberHit).toBe(1);
+		ship1.hit(3, 2);
+		ship1.hit(2, 2);
+		expect(ship1.numberHit).toBe(2);
+	});
+
+	test("ship has been sunk", () => {
+		ship1.position = { x: 2, y: 2, dir: "vertical" };
+		ship1.hit(2, 2);
+		ship1.hit(3, 2);
+		ship1.hit(4, 2);
+		expect(ship1.isSunk()).toBe(true);
 	});
 
 	test("ships created are greater than 1 and less than 6", () => {

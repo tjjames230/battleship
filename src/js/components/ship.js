@@ -6,7 +6,13 @@ class Ship {
 	}
 
 	hit(x, y) {
-		this._numberHit++;
+		for (let i = 0; i < this.position.length; i++) {
+			if (x == this.position[i][0] && y == this.position[i][1]) {
+				this._numberHit++;
+				this.position[i] = [];
+				console.log(this.position);
+			}
+		}
 	}
 
 	get numberHit() {
@@ -32,6 +38,7 @@ class Ship {
 		}
 
 		if (pos.dir === "horizontal") {
+			// if the width of the ship doesn't fit on board, return
 			if (pos.x > 9 || pos.y + this.length - 1 > 9) {
 				console.log("invalid positions, try again");
 				return;
@@ -41,6 +48,7 @@ class Ship {
 				this._position.push([pos.x, pos.y + i]);
 			}
 		} else if (pos.dir === "vertical") {
+			// if the height of the ship doesn't fit on board, return
 			if (pos.x + this.length - 1 > 9 || pos.y > 9) {
 				console.log("invalid positions, try again");
 				return;
