@@ -45,7 +45,7 @@ class Ship {
 			// if the width of the ship doesn't fit on board, return
 			if (pos.x > 9 || pos.y + this.length - 1 > 9) {
 				console.log("invalid positions, try again");
-				return;
+				return false;
 			}
 
 			for (let i = 0; i < this.length; i++) {
@@ -55,7 +55,7 @@ class Ship {
 			// if the height of the ship doesn't fit on board, return
 			if (pos.x + this.length - 1 > 9 || pos.y > 9) {
 				console.log("invalid positions, try again");
-				return;
+				return false;
 			}
 
 			for (let i = 0; i < this.length; i++) {
@@ -63,6 +63,25 @@ class Ship {
 			}
 		}
 	}
+
+	/* TRYING TO CONVERT
+	checkValidPlacement(pos) {
+		if (!checkInvalidWidth(pos)) {
+			return false;
+		}
+
+		function checkInvalidWidth(pos) {
+			if (pos.dir === "horizontal") {
+				if (pos.x > 9 || pos.y + this.length - 1 > 9) {
+					console.log("invalid positions, try again");
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
+	*/
 }
 
 module.exports = { Ship };

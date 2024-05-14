@@ -11,7 +11,6 @@ describe("Ship", () => {
 
 	test("ship created test", () => {
 		expect(ship1).toEqual({ length: 3, _numberHit: 0, _position: [] });
-
 		expect(ship2).toEqual({ length: 5, _numberHit: 0, _position: [] });
 	});
 
