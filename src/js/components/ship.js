@@ -31,10 +31,14 @@ class Ship {
 
 	set position(pos) {
 		// making sure the coordinates given are valid and do not exceed the board
+		if (!pos || typeof pos !== "object" || !pos.x || !pos.y || !pos.dir) {
+			console.log("invalid object");
+			return false;
+		}
 
 		if (pos.x < 0 || pos.y < 0) {
 			console.log("invalid positions, try again");
-			return;
+			return false;
 		}
 
 		if (pos.dir === "horizontal") {
