@@ -10,14 +10,15 @@ describe("Player", () => {
 	});
 
 	test("player created successfully", () => {
+		console.log(playerOne);
 		expect(playerOne).toEqual({
 			name: "p1",
 			ships: [
-				(Ship = { length: 2, _numberHit: 0, _position: [] }),
-				(Ship = { length: 3, _numberHit: 0, _position: [] }),
-				(Ship = { length: 4, _numberHit: 0, _position: [] }),
-				(Ship = { length: 4, _numberHit: 0, _position: [] }),
-				(Ship = { length: 5, _numberHit: 0, _position: [] }),
+				{ length: 2, _numberHit: 0, _position: [] },
+				{ length: 3, _numberHit: 0, _position: [] },
+				{ length: 4, _numberHit: 0, _position: [] },
+				{ length: 4, _numberHit: 0, _position: [] },
+				{ length: 5, _numberHit: 0, _position: [] },
 			],
 			board: [
 				/* row will be the first input for position */
