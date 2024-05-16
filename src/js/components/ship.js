@@ -65,6 +65,7 @@ class Ship {
 	}
 
 	/* TRYING TO CONVERT
+	TEST CODE FOR PUSH
 	checkValidPlacement(pos) {
 		if (!checkInvalidWidth(pos)) {
 			return false;
