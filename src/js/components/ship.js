@@ -30,59 +30,69 @@ class Ship {
 	}
 
 	set position(pos) {
-		// making sure the coordinates given are valid and do not exceed the board
-		if (!pos || typeof pos !== "object" || !pos.x || !pos.y || !pos.dir) {
-			console.log("invalid object");
-			return false;
-		}
-
-		if (pos.x < 0 || pos.y < 0) {
-			console.log("invalid positions, try again");
+		// has to pass valid checks
+		if (!checkValidPlacement(pos, this)) {
 			return false;
 		}
 
 		if (pos.dir === "horizontal") {
-			// if the width of the ship doesn't fit on board, return
-			if (pos.x > 9 || pos.y + this.length - 1 > 9) {
-				console.log("invalid positions, try again");
-				return false;
-			}
-
 			for (let i = 0; i < this.length; i++) {
 				this._position.push([pos.x, pos.y + i]);
 			}
 		} else if (pos.dir === "vertical") {
-			// if the height of the ship doesn't fit on board, return
-			if (pos.x + this.length - 1 > 9 || pos.y > 9) {
-				console.log("invalid positions, try again");
-				return false;
-			}
-
 			for (let i = 0; i < this.length; i++) {
 				this._position.push([pos.x + i, pos.y]);
 			}
 		}
-	}
 
-	/* TRYING TO CONVERT
-	TEST CODE FOR PUSH
-	checkValidPlacement(pos) {
-		if (!checkInvalidWidth(pos)) {
-			return false;
-		}
+		function checkValidPlacement(pos, ship) {
+			if (!checkValidCoordinates(pos)) {
+				return false;
+			} else if (!checkValidWidth(pos, ship)) {
+				return false;
+			} else if (!checkValidHeight(pos, ship)) {
+				return false;
+			}
 
-		function checkInvalidWidth(pos) {
-			if (pos.dir === "horizontal") {
-				if (pos.x > 9 || pos.y + this.length - 1 > 9) {
+			function checkValidCoordinates(pos) {
+				if (!pos || typeof pos !== "object" || !pos.x || !pos.y || !pos.dir) {
+					console.log("invalid object");
+					return false;
+				}
+
+				if (pos.x < 0 || pos.y < 0) {
 					console.log("invalid positions, try again");
 					return false;
 				}
-			}
-		}
 
-		return true;
+				return true;
+			}
+
+			function checkValidWidth(pos, ship) {
+				if (pos.dir === "horizontal") {
+					if (pos.x > 9 || pos.y + ship.length - 1 > 9) {
+						console.log("invalid positions, try again");
+						return false;
+					}
+				}
+
+				return true;
+			}
+
+			function checkValidHeight(pos, ship) {
+				if (pos.dir === "vertical") {
+					if (pos.x + ship.length - 1 > 9 || pos.y > 9) {
+						console.log("invalid positions, try again");
+						return false;
+					}
+				}
+
+				return true;
+			}
+
+			return true;
+		}
 	}
-	*/
 }
 
 module.exports = { Ship };
