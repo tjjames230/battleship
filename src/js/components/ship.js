@@ -44,55 +44,55 @@ class Ship {
 				this._position.push([pos.x + i, pos.y]);
 			}
 		}
+	}
+}
 
-		function checkValidPlacement(pos, ship) {
-			if (!checkValidCoordinates(pos)) {
-				return false;
-			} else if (!checkValidWidth(pos, ship)) {
-				return false;
-			} else if (!checkValidHeight(pos, ship)) {
-				return false;
-			}
+function checkValidPlacement(pos, ship) {
+	if (!checkValidCoordinates(pos)) {
+		return false;
+	} else if (!checkValidWidth(pos, ship)) {
+		return false;
+	} else if (!checkValidHeight(pos, ship)) {
+		return false;
+	}
 
-			function checkValidCoordinates(pos) {
-				if (!pos || typeof pos !== "object" || !pos.x || !pos.y || !pos.dir) {
-					console.log("invalid object");
-					return false;
-				}
+	return true;
+}
 
-				if (pos.x < 0 || pos.y < 0) {
-					console.log("invalid positions, try again");
-					return false;
-				}
+function checkValidCoordinates(pos) {
+	if (!pos || typeof pos !== "object" || !pos.x || !pos.y || !pos.dir) {
+		console.log("invalid object");
+		return false;
+	}
 
-				return true;
-			}
+	if (pos.x < 0 || pos.y < 0) {
+		console.log("invalid positions, try again");
+		return false;
+	}
 
-			function checkValidWidth(pos, ship) {
-				if (pos.dir === "horizontal") {
-					if (pos.x > 9 || pos.y + ship.length - 1 > 9) {
-						console.log("invalid positions, try again");
-						return false;
-					}
-				}
+	return true;
+}
 
-				return true;
-			}
-
-			function checkValidHeight(pos, ship) {
-				if (pos.dir === "vertical") {
-					if (pos.x + ship.length - 1 > 9 || pos.y > 9) {
-						console.log("invalid positions, try again");
-						return false;
-					}
-				}
-
-				return true;
-			}
-
-			return true;
+function checkValidWidth(pos, ship) {
+	if (pos.dir === "horizontal") {
+		if (pos.x > 9 || pos.y + ship.length - 1 > 9) {
+			console.log("invalid positions, try again");
+			return false;
 		}
 	}
+
+	return true;
+}
+
+function checkValidHeight(pos, ship) {
+	if (pos.dir === "vertical") {
+		if (pos.x + ship.length - 1 > 9 || pos.y > 9) {
+			console.log("invalid positions, try again");
+			return false;
+		}
+	}
+
+	return true;
 }
 
 module.exports = { Ship };
