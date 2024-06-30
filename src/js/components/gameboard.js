@@ -15,6 +15,11 @@ class Gameboard {
 			/* Row 9 */ ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
 		];
 	}
+
+	/*
+	receive attack that will take in two coordinates based on makeAttack from player
+	and will update the board
+	*/
 }
 
 module.exports = { Gameboard };

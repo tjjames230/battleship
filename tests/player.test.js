@@ -1,4 +1,6 @@
 const { Player } = require("../src/js/components/player");
+const { Ship } = require("../src/js/components/ship");
+const { Gameboard } = require("../src/js/components/gameboard");
 
 describe("Player", () => {
 	let playerOne;
@@ -10,30 +12,33 @@ describe("Player", () => {
 	});
 
 	test("player created successfully", () => {
-		console.log(playerOne);
-		expect(playerOne).toEqual({
-			name: "p1",
-			ships: [
-				{ length: 2, _numberHit: 0, _position: [] },
-				{ length: 3, _numberHit: 0, _position: [] },
-				{ length: 4, _numberHit: 0, _position: [] },
-				{ length: 4, _numberHit: 0, _position: [] },
-				{ length: 5, _numberHit: 0, _position: [] },
-			],
-			board: [
-				/* row will be the first input for position */
-				/*------------0----1----2----3----4----5----6----7----8----9*/
-				/* Row 0 */ ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
-				/* Row 1 */ ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
-				/* Row 2 */ ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
-				/* Row 3 */ ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
-				/* Row 4 */ ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
-				/* Row 5 */ ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
-				/* Row 6 */ ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
-				/* Row 7 */ ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
-				/* Row 8 */ ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
-				/* Row 9 */ ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
-			],
+		expect(playerOne.name).toBe("p1");
+
+		const expectedShips = [
+			{ length: 2, _numberHit: 0, _position: [] },
+			{ length: 3, _numberHit: 0, _position: [] },
+			{ length: 3, _numberHit: 0, _position: [] },
+			{ length: 4, _numberHit: 0, _position: [] },
+			{ length: 5, _numberHit: 0, _position: [] },
+		];
+
+		playerOne.ships.forEach((ship, index) => {
+			expect(ship).toMatchObject(expectedShips[index]);
+			expect(ship).toBeInstanceOf(Ship);
 		});
+
+		expect(playerOne.playerBoard).toBeInstanceOf(Gameboard);
+		expect(playerOne.playerBoard.board).toEqual([
+			["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+			["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+			["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+			["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+			["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+			["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+			["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+			["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+			["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+			["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
+		]);
 	});
 });

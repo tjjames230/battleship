@@ -2,11 +2,9 @@ const { Gameboard } = require("../src/js/components/gameboard");
 
 describe("Gameboard", () => {
 	let gameboardOne;
-	let gameboardTwo;
 
 	beforeEach(() => {
 		gameboardOne = new Gameboard();
-		gameboardTwo = new Gameboard();
 	});
 
 	test("gameboard successfully created", () => {

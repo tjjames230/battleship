@@ -5,17 +5,17 @@ class Player {
 	constructor(name) {
 		this.name = name;
 		this.ships = this.initializieShips();
-		this.board = this.initializePlayerBoard();
+		this.playerBoard = new Gameboard();
+		this.turn = false;
 	}
 
 	initializieShips() {
-		const shipSizes = [2, 3, 4, 4, 5];
+		const shipSizes = [2, 3, 3, 4, 5];
 		return shipSizes.map((size) => new Ship(size));
 	}
 
-	initializePlayerBoard() {
-		const playerBoard = new Gameboard();
-		return playerBoard.board;
+	makeAttack(x, y) {
+		this.board.receiveAttack(x, y);
 	}
 }
 
