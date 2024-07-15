@@ -1,13 +1,27 @@
 class GameController {
-	static gameOver = false;
+	gameOver = false;
 
-	static checkGameOver() {
+	checkGameOver() {
 		return this.gameOver;
 	}
 
-	static updateGameOver(val) {
-		if (typeof val === Boolean) {
+	updateGameOver(val) {
+		if (typeof val === "boolean") {
 			this.gameOver = val;
+		}
+	}
+
+	checkWinner(player) {
+		const allShipsSunk = player.ships.every((ship) => {
+			return ship.isSunk() === true;
+		});
+
+		if (allShipsSunk) {
+			this.updateGameOver(true);
+			console.log(this.checkGameOver());
+			return this.checkGameOver();
+		} else {
+			return false;
 		}
 	}
 }
