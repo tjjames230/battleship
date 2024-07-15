@@ -10,8 +10,11 @@ class Ship {
 			if (x == this.position[i][0] && y == this.position[i][1]) {
 				this._numberHit++;
 				this.position[i] = [];
+				return true;
 			}
 		}
+
+		return false;
 	}
 
 	get numberHit() {
