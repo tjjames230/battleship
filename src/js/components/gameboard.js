@@ -17,10 +17,10 @@ class Gameboard {
 	}
 
 	receiveAttack(x, y) {
-		if (this.board[0][x][y] === "-") {
-			this.board[0][x][y] = "O";
-		} else if (this.board[0][x][y] === "A") {
-			this.board[0][x][y] = "X";
+		if (this.board[x][y] === "-") {
+			this.board[x][y] = "O";
+		} else if (this.board[x][y] === "A") {
+			this.board[x][y] = "X";
 		}
 	}
 
