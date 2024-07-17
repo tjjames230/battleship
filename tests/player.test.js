@@ -1,6 +1,6 @@
-const { Player } = require("../src/js/components/player");
-const { Ship } = require("../src/js/components/ship");
-const { Gameboard } = require("../src/js/components/gameboard");
+const { Player } = require("../src/js/player");
+const { Ship } = require("../src/js/ship");
+const { Gameboard } = require("../src/js/gameboard");
 
 describe("Player", () => {
 	let playerOne;

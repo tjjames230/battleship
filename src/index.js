@@ -1,4 +1,4 @@
-import { init } from "./js/init.js";
+import { UI } from "./js/ui";
 import "./scss/styles.scss";
 
-init();
+document.addEventListener("DOMContentLoaded", UI.loadHome());

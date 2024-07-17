@@ -1,4 +1,4 @@
-const { Gameboard } = require("../src/js/components/gameboard");
+const { Gameboard } = require("../src/js/gameboard");
 
 describe("Gameboard", () => {
 	let gameboardOne;

@@ -1,5 +1,5 @@
-const { GameController } = require("../src/js/components/controller");
-const { Player } = require("../src/js/components/player");
+const { GameController } = require("../src/js/controller");
+const { Player } = require("../src/js/player");
 
 describe("Game Controller", () => {
 	let playerOne;
