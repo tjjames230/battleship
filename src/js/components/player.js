@@ -15,6 +15,7 @@ class Player {
 	}
 
 	// method that updates the playerboard values based on ship placement
+	placeShipsOnBoard() {}
 
 	makeAttack(x, y, otherPlayer) {
 		otherPlayer.playerBoard.receiveAttack(x, y);
