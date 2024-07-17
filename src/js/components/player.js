@@ -14,8 +14,13 @@ class Player {
 		return shipSizes.map((size) => new Ship(size));
 	}
 
-	// method that updates the playerboard values based on ship placement
-	placeShipsOnBoard() {}
+	setShipPositions() {
+		// method will run after a click event that sets the x and y to the values based on click. Will need to run for each ship.
+	}
+
+	updateBoard() {
+		// method will update values on the playerboard after all ship positions have been set
+	}
 
 	makeAttack(x, y, otherPlayer) {
 		otherPlayer.playerBoard.receiveAttack(x, y);

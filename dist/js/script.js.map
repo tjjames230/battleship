@@ -1,1 +1,0 @@
-{"version":3,"sources":["script.js"],"names":["console","log","one","two"],"mappings":"AAAA,aAAAA,QAAQC,IAAI,eACZ,IAAMC,IAAM,EAENC,IAAM","file":"script.js","sourcesContent":["console.log(\"hello world\");\r\nconst one = 1;\r\n\r\nconst two = 3;\r\n"]}
