@@ -37,6 +37,20 @@ class Player {
 			this.turn = true;
 		}
 	}
+
+	drawBoard() {
+		const body = document.querySelector("body");
+		const board = document.createElement("section");
+		board.id = "gameboard";
+		body.appendChild(board);
+		this.playerBoard.board.map((row) => {
+			for (let i = 0; i < row.length; i++) {
+				const tile = document.createElement("div");
+				tile.classList.add("tile");
+				board.appendChild(tile);
+			}
+		});
+	}
 }
 
 module.exports = { Player };

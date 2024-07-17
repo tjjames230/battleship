@@ -1,0 +1,16 @@
+@use "../globals/" as *;
+@use "../utilities/" as *;
+
+#gameboard {
+	background-color: $clr-gray;
+	display: grid;
+	grid-template-columns: repeat(10, 1fr);
+	gap: rem(5);
+
+	.tile {
+		background-color: blue;
+		max-width: 100%;
+		width: rem(32);
+		height: rem(32);
+	}
+}

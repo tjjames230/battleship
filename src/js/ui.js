@@ -10,7 +10,7 @@ class UI {
 	}
 
 	static placeShips() {
-		console.log("hi");
-		console.log(this.playerOne);
+		this.playerOne.drawBoard();
+		this.playerTwo.drawBoard();
 	}
 }
