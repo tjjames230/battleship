@@ -1,7 +1,7 @@
 @use "../globals/" as *;
 @use "../utilities/" as *;
 
-#gameboard {
+.gameboard {
 	background-color: $clr-gray;
 	display: grid;
 	grid-template-columns: repeat(10, 1fr);

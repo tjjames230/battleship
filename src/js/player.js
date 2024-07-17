@@ -41,15 +41,22 @@ class Player {
 	drawBoard() {
 		const body = document.querySelector("body");
 		const board = document.createElement("section");
-		board.id = "gameboard";
+		board.classList.add("gameboard");
 		body.appendChild(board);
-		this.playerBoard.board.map((row) => {
-			for (let i = 0; i < row.length; i++) {
+
+		for (let i = 0; i < this.playerBoard.board.length; i++) {
+			for (let j = 0; j < this.playerBoard.board[i].length; j++) {
 				const tile = document.createElement("div");
+				const row = i;
+				const column = j;
 				tile.classList.add("tile");
 				board.appendChild(tile);
+
+				tile.addEventListener("click", (event) => {
+					console.log(row, column);
+				});
 			}
-		});
+		}
 	}
 }
 
