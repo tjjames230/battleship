@@ -47,16 +47,18 @@ class Player {
 		for (let i = 0; i < this.playerBoard.board.length; i++) {
 			for (let j = 0; j < this.playerBoard.board[i].length; j++) {
 				const tile = document.createElement("div");
-				const row = i;
-				const column = j;
 				tile.classList.add("tile");
 				board.appendChild(tile);
 
-				tile.addEventListener("click", (event) => {
-					console.log(row, column);
+				tile.addEventListener("click", () => {
+					if (this.turn === true) {
+						console.log(fetchCoordinates(i, j));
+					}
 				});
 			}
 		}
+
+		const fetchCoordinates = (x, y) => [x, y];
 	}
 }
 
