@@ -14,8 +14,13 @@ class Player {
 		return shipSizes.map((size) => new Ship(size));
 	}
 
-	setShipPositions() {
-		// method will run after a click event that sets the x and y to the values based on click. Will need to run for each ship.
+	setShipPositions(coordinates) {
+		this.ships.map((ship) => {
+			ship.position = coordinates;
+		});
+
+		console.log(coordinates);
+		console.log(this.ships);
 	}
 
 	updateBoard() {

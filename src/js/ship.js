@@ -37,6 +37,8 @@ class Ship {
 			return false;
 		}
 
+		this._position = [];
+
 		if (pos.dir === "horizontal") {
 			for (let i = 0; i < this.length; i++) {
 				this._position.push([pos.x, pos.y + i]);
@@ -62,7 +64,7 @@ function checkValidPlacement(pos, ship) {
 }
 
 function checkValidCoordinates(pos) {
-	if (!pos || typeof pos !== "object" || !pos.x || !pos.y || !pos.dir) {
+	if (!pos || typeof pos !== "object" || !pos.dir) {
 		console.log("invalid object");
 		return false;
 	}

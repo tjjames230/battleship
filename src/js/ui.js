@@ -11,9 +11,7 @@ class UI {
 
 	static placeShips() {
 		this.drawBoard(this.playerOne);
-		this.drawBoard(this.playerTwo);
 		this.addTileEventListeners(this.playerOne);
-		this.addTileEventListeners(this.playerTwo);
 	}
 
 	static drawBoard(player) {
@@ -38,7 +36,14 @@ class UI {
 
 		tiles.map((tile) => {
 			tile.addEventListener("click", () => {
-				console.log(tile.dataset.x, tile.dataset.y);
+				// setting direction to vertical by default, will update based on button input after that is created
+				const coordinates = {
+					x: Number(tile.dataset.x),
+					y: Number(tile.dataset.y),
+					dir: "vertical",
+				};
+
+				player.setShipPositions(coordinates);
 			});
 		});
 	}
