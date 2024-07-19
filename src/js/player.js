@@ -37,29 +37,6 @@ class Player {
 			this.turn = true;
 		}
 	}
-
-	drawBoard() {
-		const body = document.querySelector("body");
-		const board = document.createElement("section");
-		board.classList.add("gameboard");
-		body.appendChild(board);
-
-		for (let i = 0; i < this.playerBoard.board.length; i++) {
-			for (let j = 0; j < this.playerBoard.board[i].length; j++) {
-				const tile = document.createElement("div");
-				tile.classList.add("tile");
-				board.appendChild(tile);
-
-				tile.addEventListener("click", () => {
-					if (this.turn === true) {
-						console.log(fetchCoordinates(i, j));
-					}
-				});
-			}
-		}
-
-		const fetchCoordinates = (x, y) => [x, y];
-	}
 }
 
 module.exports = { Player };
