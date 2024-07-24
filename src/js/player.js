@@ -14,13 +14,10 @@ class Player {
 		return shipSizes.map((size) => new Ship(size));
 	}
 
-	setShipPositions(coordinates) {
+	setShipPosition(coordinates) {
 		this.ships.map((ship) => {
 			ship.position = coordinates;
 		});
-
-		console.log(coordinates);
-		console.log(this.ships);
 	}
 
 	updateBoard() {

@@ -10,8 +10,16 @@ class UI {
 	}
 
 	static placeShips() {
+		this.drawHeader();
 		this.drawBoard(this.playerOne);
-		this.addTileEventListeners(this.playerOne);
+		this.addEventListenerToPlaceShips(this.playerOne);
+	}
+
+	static drawHeader() {
+		const header = document.createElement("h1");
+		const body = document.querySelector("body");
+		header.textContent = "Place your ships";
+		body.appendChild(header);
 	}
 
 	static drawBoard(player) {
@@ -31,7 +39,7 @@ class UI {
 		}
 	}
 
-	static addTileEventListeners(player) {
+	static addEventListenerToPlaceShips(player) {
 		const tiles = Array.from(document.querySelectorAll(`.${player.name}-tile`));
 
 		tiles.map((tile) => {

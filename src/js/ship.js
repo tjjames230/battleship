@@ -6,10 +6,10 @@ class Ship {
 	}
 
 	hit(x, y) {
-		for (let i = 0; i < this.position.length; i++) {
-			if (x == this.position[i][0] && y == this.position[i][1]) {
+		for (let i = 0; i < this._position.length; i++) {
+			if (x == this._position[i][0] && y == this._position[i][1]) {
 				this._numberHit++;
-				this.position[i] = [];
+				this._position[i] = [];
 				return true;
 			}
 		}
