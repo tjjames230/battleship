@@ -1,6 +1,10 @@
 @use "../globals/" as *;
 @use "../utilities/" as *;
 
+#gameboard-ctn {
+	display: flex;
+}
+
 .gameboard {
 	background-color: $clr-gray;
 	display: grid;

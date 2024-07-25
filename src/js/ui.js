@@ -4,29 +4,20 @@ import { Player } from "./player";
 class UI {
 	static playerOne = new Player("p1", true);
 	static playerTwo = new Player("p2", false);
+	static body = document.querySelector("body");
 
-	static loadHome() {
-		this.placeShips();
+	static loadSetup() {
+		const h1 = document.createElement("h1");
+		h1.innerText = "Place your ships";
+		this.body.appendChild(h1);
+		this.displayShipPlacementBoard(this.playerOne);
 	}
 
-	static placeShips() {
-		this.drawHeader();
-		this.drawBoard(this.playerOne);
-		this.addEventListenerToPlaceShips(this.playerOne);
-	}
-
-	static drawHeader() {
-		const header = document.createElement("h1");
-		const body = document.querySelector("body");
-		header.textContent = "Place your ships";
-		body.appendChild(header);
-	}
-
-	static drawBoard(player) {
-		const body = document.querySelector("body");
+	static displayShipPlacementBoard(player) {
 		const board = document.createElement("section");
+		const boardCtn = document.createElement("main");
+		boardCtn.id = "gameboard-ctn";
 		board.classList.add("gameboard");
-		body.appendChild(board);
 
 		for (let i = 0; i < player.playerBoard.board.length; i++) {
 			for (let j = 0; j < player.playerBoard.board[i].length; j++) {
@@ -37,22 +28,8 @@ class UI {
 				board.appendChild(tile);
 			}
 		}
-	}
 
-	static addEventListenerToPlaceShips(player) {
-		const tiles = Array.from(document.querySelectorAll(`.${player.name}-tile`));
-
-		tiles.map((tile) => {
-			tile.addEventListener("click", () => {
-				// setting direction to vertical by default, will update based on button input after that is created
-				const coordinates = {
-					x: Number(tile.dataset.x),
-					y: Number(tile.dataset.y),
-					dir: "vertical",
-				};
-
-				player.setShipPositions(coordinates);
-			});
-		});
+		boardCtn.appendChild(board);
+		this.body.appendChild(boardCtn);
 	}
 }
