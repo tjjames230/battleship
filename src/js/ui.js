@@ -8,12 +8,22 @@ class UI {
 	static boardCtn = document.createElement("main");
 
 	static loadSetup() {
-		const h1 = document.createElement("h1");
-		h1.innerText = "Place your ships";
+		this.loadHeader("setup");
 		this.boardCtn.id = "gameboard-ctn";
-		this.body.appendChild(h1);
 		this.displayShipPlacementBoard(this.playerOne);
 		this.body.appendChild(this.boardCtn);
+	}
+
+	static loadHeader(page) {
+		const h1 = document.createElement("h1");
+
+		if (page === "setup") {
+			h1.innerText = "Place your ships";
+		} else {
+			h1.innerText = "Error";
+		}
+
+		this.body.appendChild(h1);
 	}
 
 	static displayShipPlacementBoard(player) {
