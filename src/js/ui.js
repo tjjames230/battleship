@@ -5,18 +5,19 @@ class UI {
 	static playerOne = new Player("p1", true);
 	static playerTwo = new Player("p2", false);
 	static body = document.querySelector("body");
+	static boardCtn = document.createElement("main");
 
 	static loadSetup() {
 		const h1 = document.createElement("h1");
 		h1.innerText = "Place your ships";
+		this.boardCtn.id = "gameboard-ctn";
 		this.body.appendChild(h1);
 		this.displayShipPlacementBoard(this.playerOne);
+		this.body.appendChild(this.boardCtn);
 	}
 
 	static displayShipPlacementBoard(player) {
 		const board = document.createElement("section");
-		const boardCtn = document.createElement("main");
-		boardCtn.id = "gameboard-ctn";
 		board.classList.add("gameboard");
 
 		for (let i = 0; i < player.playerBoard.board.length; i++) {
@@ -29,7 +30,6 @@ class UI {
 			}
 		}
 
-		boardCtn.appendChild(board);
-		this.body.appendChild(boardCtn);
+		this.boardCtn.appendChild(board);
 	}
 }
