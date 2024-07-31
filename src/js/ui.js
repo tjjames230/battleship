@@ -84,6 +84,12 @@ class UI {
 			tile.addEventListener("mouseover", () => {
 				console.log("hi");
 			});
+
+			/*
+
+				NEXT STEP: ADD LOGIC TO ADD HOVER CLASS, THEN ADD ADDITIONAL LOGIC FOR "INDIRECT" COLOR CHANGE BASED ON SELECTION LENGTH
+
+			*/
 		});
 	}
 }
