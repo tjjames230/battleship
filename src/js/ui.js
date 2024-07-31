@@ -21,9 +21,17 @@ class UI {
 
 		for (let i = 0; i < this.playerOne.ships.length; i++) {
 			const currentShipCtn = document.createElement("div");
+			const currentShip = this.playerOne.ships[i];
+
 			currentShipCtn.classList.add("ship-ctn");
 			currentShipCtn.addEventListener("click", () => {
+				const allShipCtns = Array.from(document.querySelectorAll(".ship-ctn"));
+				allShipCtns.map((shipCtn) => {
+					shipCtn.classList.remove("active-placement");
+					this.playerOne.ships.map((ship) => (ship.setting = false));
+				});
 				currentShipCtn.classList.add("active-placement");
+				currentShip.setting = true;
 			});
 
 			for (let j = 0; j < this.playerOne.ships[i].length; j++) {
@@ -35,6 +43,8 @@ class UI {
 			shipSelectionCtn.appendChild(currentShipCtn);
 		}
 
+		shipSelectionCtn.firstChild.classList.add("active-placement");
+		this.playerOne.ships[0].setting = true;
 		this.body.appendChild(shipSelectionCtn);
 	}
 
