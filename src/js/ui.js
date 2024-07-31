@@ -13,6 +13,7 @@ class UI {
 		this.loadShipSelection();
 		this.displayShipPlacementBoard(this.playerOne);
 		this.body.appendChild(this.boardCtn);
+		this.shipPlacementHover();
 	}
 
 	static loadShipSelection() {
@@ -75,5 +76,14 @@ class UI {
 		}
 
 		this.boardCtn.appendChild(board);
+	}
+
+	static shipPlacementHover() {
+		const boardTiles = Array.from(document.querySelectorAll(".p1-tile"));
+		boardTiles.map((tile) => {
+			tile.addEventListener("mouseover", () => {
+				console.log("hi");
+			});
+		});
 	}
 }
