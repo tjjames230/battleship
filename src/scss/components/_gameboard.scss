@@ -6,6 +6,28 @@
 	gap: rem(25);
 }
 
+#ship-selection-ctn {
+	background-color: gray;
+	display: flex;
+	gap: rem(25);
+
+	.ship-ctn {
+		display: flex;
+		gap: rem(5);
+		border: 3px solid white;
+
+		.placement-tile {
+			background-color: green;
+			width: rem(24);
+			height: rem(24);
+		}
+	}
+
+	.active-placement {
+		border: 3px solid black;
+	}
+}
+
 .gameboard {
 	background-color: $clr-gray;
 	display: grid;

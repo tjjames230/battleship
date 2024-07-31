@@ -10,8 +10,32 @@ class UI {
 	static loadSetup() {
 		this.loadHeader("setup");
 		this.boardCtn.id = "gameboard-ctn";
+		this.loadShipSelection();
 		this.displayShipPlacementBoard(this.playerOne);
 		this.body.appendChild(this.boardCtn);
+	}
+
+	static loadShipSelection() {
+		const shipSelectionCtn = document.createElement("section");
+		shipSelectionCtn.id = "ship-selection-ctn";
+
+		for (let i = 0; i < this.playerOne.ships.length; i++) {
+			const currentShipCtn = document.createElement("div");
+			currentShipCtn.classList.add("ship-ctn");
+			currentShipCtn.addEventListener("click", () => {
+				currentShipCtn.classList.add("active-placement");
+			});
+
+			for (let j = 0; j < this.playerOne.ships[i].length; j++) {
+				const currentShipTile = document.createElement("div");
+				currentShipTile.classList.add("placement-tile");
+				currentShipCtn.appendChild(currentShipTile);
+			}
+
+			shipSelectionCtn.appendChild(currentShipCtn);
+		}
+
+		this.body.appendChild(shipSelectionCtn);
 	}
 
 	static loadHeader(page) {

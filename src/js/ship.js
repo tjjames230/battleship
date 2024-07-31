@@ -3,6 +3,8 @@ class Ship {
 		this.length = length;
 		this._numberHit = 0;
 		this._position = [];
+		this.isSet = false;
+		this.setting = false;
 	}
 
 	hit(x, y) {
