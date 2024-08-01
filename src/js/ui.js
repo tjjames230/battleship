@@ -10,10 +10,25 @@ class UI {
 	static loadSetup() {
 		this.loadHeader("setup");
 		this.boardCtn.id = "gameboard-ctn";
+		this.loadButtonSelection();
 		this.loadShipSelection();
 		this.displayShipPlacementBoard(this.playerOne);
 		this.body.appendChild(this.boardCtn);
 		this.shipPlacementHover();
+	}
+
+	static loadButtonSelection() {
+		const btnCtn = document.createElement("section");
+		btnCtn.id = "button-ctn";
+		btnCtn.innerHTML = `
+			<button class="active-btn" id="btn-horizontal">
+				Horizontal
+			</button>
+			<button id="btn-vertical">
+				Vertical
+			</button>
+		`;
+		this.body.appendChild(btnCtn);
 	}
 
 	static loadShipSelection() {
@@ -142,12 +157,6 @@ class UI {
 					}
 				}
 			});
-
-			/*
-
-				NEXT STEP: ADD LOGIC TO ADD HOVER CLASS, THEN ADD ADDITIONAL LOGIC FOR "INDIRECT" COLOR CHANGE BASED ON SELECTION LENGTH
-
-			*/
 		});
 	}
 }
