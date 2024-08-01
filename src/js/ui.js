@@ -82,7 +82,11 @@ class UI {
 		const boardTiles = Array.from(document.querySelectorAll(".p1-tile"));
 		boardTiles.map((tile) => {
 			tile.addEventListener("mouseover", () => {
-				console.log("hi");
+				tile.classList.add("direct-hover");
+			});
+
+			tile.addEventListener("mouseleave", () => {
+				tile.classList.remove("direct-hover");
 			});
 
 			/*
