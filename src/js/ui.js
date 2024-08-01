@@ -78,14 +78,39 @@ class UI {
 		this.boardCtn.appendChild(board);
 	}
 
-	static shipPlacementHover() {
+	static getShipSelectionLength() {
+		const ships = Array.from(document.querySelectorAll(".ship-ctn"));
+
+		for (let i = 0; i < ships.length; i++) {
+			if (ships[i].classList == "ship-ctn active-placement") {
+				return ships[i].childElementCount;
+			}
+		}
+	}
+
+	static shipPlacementHover(number) {
 		const boardTiles = Array.from(document.querySelectorAll(".p1-tile"));
 		boardTiles.map((tile) => {
 			tile.addEventListener("mouseover", () => {
+				let length = this.getShipSelectionLength();
+
+				if (length === 2) {
+					const tile2 = tile.nextSibling;
+					tile2.classList.add("indirect-hover");
+				}
+
+				const nextTile = tile.nextSibling;
 				tile.classList.add("direct-hover");
 			});
 
 			tile.addEventListener("mouseleave", () => {
+				let length = this.getShipSelectionLength();
+
+				if (length === 2) {
+					const tile2 = tile.nextSibling;
+					tile2.classList.remove("indirect-hover");
+				}
+
 				tile.classList.remove("direct-hover");
 			});
 
