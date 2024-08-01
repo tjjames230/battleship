@@ -88,30 +88,59 @@ class UI {
 		}
 	}
 
-	static shipPlacementHover(number) {
+	static shipPlacementHover() {
 		const boardTiles = Array.from(document.querySelectorAll(".p1-tile"));
 		boardTiles.map((tile) => {
 			tile.addEventListener("mouseover", () => {
 				let length = this.getShipSelectionLength();
 
-				if (length === 2) {
+				tile.classList.add("direct-hover");
+
+				if (length > 1) {
 					const tile2 = tile.nextSibling;
 					tile2.classList.add("indirect-hover");
-				}
 
-				const nextTile = tile.nextSibling;
-				tile.classList.add("direct-hover");
+					if (length > 2) {
+						const tile3 = tile2.nextSibling;
+						tile3.classList.add("indirect-hover");
+
+						if (length > 3) {
+							const tile4 = tile3.nextSibling;
+							tile4.classList.add("indirect-hover");
+
+							if (length > 4) {
+								const tile5 = tile4.nextSibling;
+								tile5.classList.add("indirect-hover");
+							}
+						}
+					}
+				}
 			});
 
 			tile.addEventListener("mouseleave", () => {
 				let length = this.getShipSelectionLength();
 
-				if (length === 2) {
+				tile.classList.remove("direct-hover");
+
+				if (length > 1) {
 					const tile2 = tile.nextSibling;
 					tile2.classList.remove("indirect-hover");
-				}
 
-				tile.classList.remove("direct-hover");
+					if (length > 2) {
+						const tile3 = tile2.nextSibling;
+						tile3.classList.remove("indirect-hover");
+
+						if (length > 3) {
+							const tile4 = tile3.nextSibling;
+							tile4.classList.remove("indirect-hover");
+
+							if (length > 4) {
+								const tile5 = tile4.nextSibling;
+								tile5.classList.remove("indirect-hover");
+							}
+						}
+					}
+				}
 			});
 
 			/*
