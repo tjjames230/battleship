@@ -96,19 +96,19 @@ class UI {
 
 				tile.classList.add("direct-hover");
 
-				if (length > 1) {
+				if (length > 1 && tile.dataset.y < 9) {
 					const tile2 = tile.nextSibling;
 					tile2.classList.add("indirect-hover");
 
-					if (length > 2) {
+					if (length > 2 && tile.dataset.y < 8) {
 						const tile3 = tile2.nextSibling;
 						tile3.classList.add("indirect-hover");
 
-						if (length > 3) {
+						if (length > 3 && tile.dataset.y < 7) {
 							const tile4 = tile3.nextSibling;
 							tile4.classList.add("indirect-hover");
 
-							if (length > 4) {
+							if (length > 4 && tile.dataset.y < 6) {
 								const tile5 = tile4.nextSibling;
 								tile5.classList.add("indirect-hover");
 							}
