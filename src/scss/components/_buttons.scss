@@ -1,0 +1,22 @@
+@use "../globals/" as *;
+@use "../utilities/" as *;
+
+#button-ctn {
+	display: flex;
+	gap: rem(25);
+
+	button {
+		background-color: rgb(194, 194, 194);
+		border: none;
+		padding: rem(5) rem(20);
+	}
+
+	button:hover {
+		cursor: pointer;
+	}
+
+	.active-btn {
+		background-color: rgb(177, 177, 177);
+		border: 2px solid black;
+	}
+}
