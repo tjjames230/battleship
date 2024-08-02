@@ -23,7 +23,10 @@ class UI {
 		const boardTiles = Array.from(document.querySelectorAll(".p1-tile"));
 		boardTiles.map((tile) => {
 			tile.addEventListener("click", () => {
-				console.log("hi");
+				const length = this.getShipSelectionLength();
+				const direction = this.getShipDirection();
+
+				console.log(length, direction);
 			});
 		});
 	}
