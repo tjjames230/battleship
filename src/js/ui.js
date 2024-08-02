@@ -123,7 +123,7 @@ class UI {
 		const btns = Array.from(document.querySelectorAll("button"));
 		for (let i = 0; i < btns.length; i++) {
 			if (btns[i].classList == "active-btn") {
-				return btns[i].textContent;
+				return btns[i].innerText.toLowerCase();
 			}
 		}
 	}
@@ -133,24 +133,47 @@ class UI {
 		boardTiles.map((tile) => {
 			tile.addEventListener("mouseover", () => {
 				let length = this.getShipSelectionLength();
+				let direction = this.getShipDirection();
 
 				tile.classList.add("direct-hover");
 
-				if (length > 1 && tile.dataset.y < 9) {
-					const tile2 = tile.nextSibling;
-					tile2.classList.add("indirect-hover");
+				if (direction === "horizontal") {
+					if (length > 1 && tile.dataset.y < 9) {
+						const tile2 = tile.nextSibling;
+						tile2.classList.add("indirect-hover");
 
-					if (length > 2 && tile.dataset.y < 8) {
-						const tile3 = tile2.nextSibling;
-						tile3.classList.add("indirect-hover");
+						if (length > 2 && tile.dataset.y < 8) {
+							const tile3 = tile2.nextSibling;
+							tile3.classList.add("indirect-hover");
 
-						if (length > 3 && tile.dataset.y < 7) {
-							const tile4 = tile3.nextSibling;
-							tile4.classList.add("indirect-hover");
+							if (length > 3 && tile.dataset.y < 7) {
+								const tile4 = tile3.nextSibling;
+								tile4.classList.add("indirect-hover");
 
-							if (length > 4 && tile.dataset.y < 6) {
-								const tile5 = tile4.nextSibling;
-								tile5.classList.add("indirect-hover");
+								if (length > 4 && tile.dataset.y < 6) {
+									const tile5 = tile4.nextSibling;
+									tile5.classList.add("indirect-hover");
+								}
+							}
+						}
+					}
+				} else if (direction === "vertical") {
+					if (length > 1 && tile.dataset.x < 9) {
+						const tile2 = boardTiles[boardTiles.indexOf(tile) + 10];
+						tile2.classList.add("indirect-hover");
+
+						if (length > 2 && tile.dataset.x < 8) {
+							const tile3 = boardTiles[boardTiles.indexOf(tile2) + 10];
+							tile3.classList.add("indirect-hover");
+
+							if (length > 3 && tile.dataset.x < 7) {
+								const tile4 = boardTiles[boardTiles.indexOf(tile3) + 10];
+								tile4.classList.add("indirect-hover");
+
+								if (length > 4 && tile.dataset.x < 6) {
+									const tile5 = boardTiles[boardTiles.indexOf(tile4) + 10];
+									tile5.classList.add("indirect-hover");
+								}
 							}
 						}
 					}
@@ -159,24 +182,47 @@ class UI {
 
 			tile.addEventListener("mouseleave", () => {
 				let length = this.getShipSelectionLength();
+				let direction = this.getShipDirection();
 
 				tile.classList.remove("direct-hover");
 
-				if (length > 1) {
-					const tile2 = tile.nextSibling;
-					tile2.classList.remove("indirect-hover");
+				if (direction === "horizontal") {
+					if (length > 1 && tile.dataset.y < 9) {
+						const tile2 = tile.nextSibling;
+						tile2.classList.remove("indirect-hover");
 
-					if (length > 2) {
-						const tile3 = tile2.nextSibling;
-						tile3.classList.remove("indirect-hover");
+						if (length > 2 && tile.dataset.y < 8) {
+							const tile3 = tile2.nextSibling;
+							tile3.classList.remove("indirect-hover");
 
-						if (length > 3) {
-							const tile4 = tile3.nextSibling;
-							tile4.classList.remove("indirect-hover");
+							if (length > 3 && tile.dataset.y < 7) {
+								const tile4 = tile3.nextSibling;
+								tile4.classList.remove("indirect-hover");
 
-							if (length > 4) {
-								const tile5 = tile4.nextSibling;
-								tile5.classList.remove("indirect-hover");
+								if (length > 4 && tile.dataset.y < 6) {
+									const tile5 = tile4.nextSibling;
+									tile5.classList.remove("indirect-hover");
+								}
+							}
+						}
+					}
+				} else if (direction === "vertical") {
+					if (length > 1 && tile.dataset.x < 9) {
+						const tile2 = boardTiles[boardTiles.indexOf(tile) + 10];
+						tile2.classList.remove("indirect-hover");
+
+						if (length > 2 && tile.dataset.x < 8) {
+							const tile3 = boardTiles[boardTiles.indexOf(tile2) + 10];
+							tile3.classList.remove("indirect-hover");
+
+							if (length > 3 && tile.dataset.x < 7) {
+								const tile4 = boardTiles[boardTiles.indexOf(tile3) + 10];
+								tile4.classList.remove("indirect-hover");
+
+								if (length > 2 && tile.dataset.x < 6) {
+									const tile5 = boardTiles[boardTiles.indexOf(tile4) + 10];
+									tile5.classList.remove("indirect-hover");
+								}
 							}
 						}
 					}
