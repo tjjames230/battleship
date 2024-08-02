@@ -16,6 +16,16 @@ class UI {
 		this.body.appendChild(this.boardCtn);
 		this.shipPlacementHover();
 		this.getShipDirection();
+		this.shipPlacementClick();
+	}
+
+	static shipPlacementClick() {
+		const boardTiles = Array.from(document.querySelectorAll(".p1-tile"));
+		boardTiles.map((tile) => {
+			tile.addEventListener("click", () => {
+				console.log("hi");
+			});
+		});
 	}
 
 	static loadButtonSelection() {
