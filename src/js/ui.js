@@ -43,8 +43,6 @@ class UI {
 
 					btn.classList.add("active-btn");
 				}
-
-				this.getShipDirection();
 			});
 		});
 	}
@@ -125,7 +123,7 @@ class UI {
 		const btns = Array.from(document.querySelectorAll("button"));
 		for (let i = 0; i < btns.length; i++) {
 			if (btns[i].classList == "active-btn") {
-				console.log(true);
+				return btns[i].textContent;
 			}
 		}
 	}
