@@ -15,9 +15,11 @@ class UI {
 		this.displayShipPlacementBoard(this.playerOne);
 		this.body.appendChild(this.boardCtn);
 		this.shipPlacementHover();
+		this.getShipDirection();
 	}
 
 	static loadButtonSelection() {
+		// adding buttons for direction of ship placement
 		const btnCtn = document.createElement("section");
 		btnCtn.id = "button-ctn";
 		btnCtn.innerHTML = `
@@ -29,6 +31,22 @@ class UI {
 			</button>
 		`;
 		this.body.appendChild(btnCtn);
+
+		// adding event listeners for buttons to select direction for ship placement
+		const btns = Array.from(document.querySelectorAll("button"));
+		btns.map((btn) => {
+			btn.addEventListener("click", () => {
+				if (btn.classList == "") {
+					for (let i = 0; i < btns.length; i++) {
+						btns[i].classList.remove("active-btn");
+					}
+
+					btn.classList.add("active-btn");
+				}
+
+				this.getShipDirection();
+			});
+		});
 	}
 
 	static loadShipSelection() {
@@ -99,6 +117,15 @@ class UI {
 		for (let i = 0; i < ships.length; i++) {
 			if (ships[i].classList == "ship-ctn active-placement") {
 				return ships[i].childElementCount;
+			}
+		}
+	}
+
+	static getShipDirection() {
+		const btns = Array.from(document.querySelectorAll("button"));
+		for (let i = 0; i < btns.length; i++) {
+			if (btns[i].classList == "active-btn") {
+				console.log(true);
 			}
 		}
 	}
