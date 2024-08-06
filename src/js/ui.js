@@ -25,6 +25,14 @@ class UI {
 			tile.addEventListener("click", () => {
 				const length = this.getShipSelectionLength();
 				const direction = this.getShipDirection();
+				const currentShip = document.querySelector(
+					".ship-ctn.active-placement"
+				);
+
+				if (length === 3) {
+					let shipId = currentShip.id;
+					console.log(shipId);
+				}
 
 				console.log(length, direction);
 			});
