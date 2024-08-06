@@ -85,9 +85,17 @@ class UI {
 				currentShipCtn.appendChild(currentShipTile);
 			}
 
+			// add unique id to the 3 length ships
+			if (shipSelectionCtn.childElementCount === 1) {
+				currentShipCtn.id = "ship3-1";
+			} else if (shipSelectionCtn.childElementCount === 2) {
+				currentShipCtn.id = "ship3-2";
+			}
+
 			shipSelectionCtn.appendChild(currentShipCtn);
 		}
 
+		console.log(shipSelectionCtn.childElementCount);
 		shipSelectionCtn.firstChild.classList.add("active-placement");
 		this.playerOne.ships[0].setting = true;
 		this.body.appendChild(shipSelectionCtn);
