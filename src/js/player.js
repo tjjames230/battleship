@@ -14,14 +14,17 @@ class Player {
 		return shipSizes.map((size) => new Ship(size));
 	}
 
-	setShipPosition(coordinates) {
-		this.ships.map((ship) => {
-			ship.position = coordinates;
-		});
-	}
-
 	updateBoard() {
-		// method will update values on the playerboard after all ship positions have been set
+		this.ships.forEach((ship) => {
+			if (ship.position.length > 0) {
+				for (let i = 0; i < ship.position.length; i++) {
+					this.playerBoard.board[ship.position[i][0]][ship.position[i][1]] =
+						"X";
+				}
+			}
+		});
+
+		console.log(this.playerBoard.board);
 	}
 
 	makeAttack(x, y, otherPlayer) {

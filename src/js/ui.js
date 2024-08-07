@@ -60,6 +60,7 @@ class UI {
 				});
 
 				console.log(this.playerOne.ships);
+				this.updateBoard(this.playerOne);
 			});
 		});
 	}
@@ -160,6 +161,12 @@ class UI {
 		}
 
 		this.boardCtn.appendChild(board);
+	}
+
+	static updateBoard(player) {
+		const boardTiles = document.querySelectorAll(`.${player.name}-tile`);
+
+		player.updateBoard();
 	}
 
 	static getShipSelectionLength() {
