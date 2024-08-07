@@ -28,13 +28,38 @@ class UI {
 				const currentShip = document.querySelector(
 					".ship-ctn.active-placement"
 				);
+				const tileX = Number(tile.dataset.x);
+				const tileY = Number(tile.dataset.y);
 
 				if (length === 3) {
 					let shipId = currentShip.id;
-					console.log(shipId);
+
+					if (shipId === "ship3-1") {
+						this.playerOne.ships[1].position = {
+							x: tileX,
+							y: tileY,
+							dir: direction,
+						};
+					} else {
+						this.playerOne.ships[2].position = {
+							x: tileX,
+							y: tileY,
+							dir: direction,
+						};
+					}
 				}
 
-				console.log(length, direction);
+				this.playerOne.ships.forEach((ship) => {
+					if (length === ship.length) {
+						ship.position = {
+							x: tileX,
+							y: tileY,
+							dir: direction,
+						};
+					}
+				});
+
+				console.log(this.playerOne.ships);
 			});
 		});
 	}
@@ -103,7 +128,6 @@ class UI {
 			shipSelectionCtn.appendChild(currentShipCtn);
 		}
 
-		console.log(shipSelectionCtn.childElementCount);
 		shipSelectionCtn.firstChild.classList.add("active-placement");
 		this.playerOne.ships[0].setting = true;
 		this.body.appendChild(shipSelectionCtn);
