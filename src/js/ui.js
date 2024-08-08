@@ -36,9 +36,27 @@ class UI {
 				);
 				const tileX = Number(tile.dataset.x);
 				const tileY = Number(tile.dataset.y);
+				const currentShipPositions = [];
+
+				this.playerOne.ships.map((ship) => {
+					for (let i = 0; i < ship.position.length; i++) {
+						currentShipPositions.push(ship.position[i]);
+					}
+				});
+
+				console.log(currentShipPositions);
 
 				if (length === 3) {
 					let shipId = currentShip.id;
+					const shipCoordinates = [];
+
+					for (let i = 0; i < length; i++) {
+						if (direction === "horizontal") {
+							shipCoordinates.push([tileX, tileY + i]);
+						} else if (direction === "vertical") {
+							shipCoordinates.push([tileX + i, tileY]);
+						}
+					}
 
 					if (shipId === "ship3-1") {
 						const previousPosition = this.playerOne.ships[1].position;
@@ -51,11 +69,19 @@ class UI {
 							}
 						}
 
-						this.playerOne.ships[1].position = {
-							x: tileX,
-							y: tileY,
-							dir: direction,
-						};
+						if (
+							this.currentShipPositionChecker(
+								currentShipPositions,
+								shipCoordinates,
+								length
+							)
+						) {
+							this.playerOne.ships[1].position = {
+								x: tileX,
+								y: tileY,
+								dir: direction,
+							};
+						}
 					} else {
 						const previousPosition = this.playerOne.ships[2].position;
 
@@ -99,6 +125,16 @@ class UI {
 				this.updateBoard(this.playerOne);
 			});
 		});
+	}
+
+	static currentShipPositionChecker(allPositions, coordinates, length) {
+		for (let i = 0; i < length; i++) {
+			if (allPositions.includes(coordinates[i])) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	static loadButtonSelection() {
