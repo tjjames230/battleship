@@ -41,12 +41,32 @@ class UI {
 					let shipId = currentShip.id;
 
 					if (shipId === "ship3-1") {
+						const previousPosition = this.playerOne.ships[1].position;
+
+						if (previousPosition.length > 0) {
+							for (let i = 0; i < previousPosition.length; i++) {
+								this.playerOne.playerBoard.board[
+									this.playerOne.ships[1].position[i][0]
+								][this.playerOne.ships[1].position[i][1]] = "-";
+							}
+						}
+
 						this.playerOne.ships[1].position = {
 							x: tileX,
 							y: tileY,
 							dir: direction,
 						};
 					} else {
+						const previousPosition = this.playerOne.ships[2].position;
+
+						if (previousPosition.length > 0) {
+							for (let i = 0; i < previousPosition.length; i++) {
+								this.playerOne.playerBoard.board[
+									this.playerOne.ships[2].position[i][0]
+								][this.playerOne.ships[2].position[i][1]] = "-";
+							}
+						}
+
 						this.playerOne.ships[2].position = {
 							x: tileX,
 							y: tileY,
@@ -57,6 +77,16 @@ class UI {
 
 				this.playerOne.ships.forEach((ship) => {
 					if (length !== 3 && length === ship.length) {
+						const previousPosition = ship.position;
+
+						if (previousPosition.length > 0) {
+							for (let i = 0; i < previousPosition.length; i++) {
+								this.playerOne.playerBoard.board[ship.position[i][0]][
+									ship.position[i][1]
+								] = "-";
+							}
+						}
+
 						ship.position = {
 							x: tileX,
 							y: tileY,
@@ -171,8 +201,8 @@ class UI {
 
 	static updateBoard(player) {
 		const boardTiles = document.querySelectorAll(`.${player.name}-tile`);
-
-		player.updateBoard();
+		player.updateBoardState();
+		console.log(player.playerBoard.board);
 	}
 
 	static getShipSelectionLength() {

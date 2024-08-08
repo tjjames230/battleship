@@ -14,7 +14,7 @@ class Player {
 		return shipSizes.map((size) => new Ship(size));
 	}
 
-	updateBoard() {
+	updateBoardState() {
 		this.ships.forEach((ship) => {
 			if (ship.position.length > 0) {
 				for (let i = 0; i < ship.position.length; i++) {
@@ -23,8 +23,6 @@ class Player {
 				}
 			}
 		});
-
-		console.log(this.playerBoard.board);
 	}
 
 	makeAttack(x, y, otherPlayer) {
