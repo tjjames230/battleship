@@ -19,7 +19,7 @@ class Player {
 			if (ship.position.length > 0) {
 				for (let i = 0; i < ship.position.length; i++) {
 					this.playerBoard.board[ship.position[i][0]][ship.position[i][1]] =
-						"X";
+						"A";
 				}
 			}
 		});

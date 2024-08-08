@@ -19,6 +19,12 @@ class UI {
 		this.shipPlacementClick();
 	}
 
+	static clearBoard(player) {
+		// need to clear board, might need to add ID's to specific player gameboard in order to clear?
+		const board = document.querySelector();
+		player.playerBoard.resetBoard();
+	}
+
 	static shipPlacementClick() {
 		const boardTiles = Array.from(document.querySelectorAll(".p1-tile"));
 		boardTiles.map((tile) => {
@@ -50,7 +56,7 @@ class UI {
 				}
 
 				this.playerOne.ships.forEach((ship) => {
-					if (length === ship.length) {
+					if (length !== 3 && length === ship.length) {
 						ship.position = {
 							x: tileX,
 							y: tileY,
