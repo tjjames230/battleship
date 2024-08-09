@@ -27,114 +27,12 @@ class UI {
 
 	static shipPlacementClick() {
 		const boardTiles = Array.from(document.querySelectorAll(".p1-tile"));
-		boardTiles.map((tile) => {
+		boardTiles.forEach((tile) => {
 			tile.addEventListener("click", () => {
-				const length = this.getShipSelectionLength();
-				const direction = this.getShipDirection();
-				const currentShip = document.querySelector(
-					".ship-ctn.active-placement"
-				);
-				const tileX = Number(tile.dataset.x);
-				const tileY = Number(tile.dataset.y);
-				const currentShipPositions = [];
-
-				this.playerOne.ships.map((ship) => {
-					for (let i = 0; i < ship.position.length; i++) {
-						currentShipPositions.push(ship.position[i]);
-					}
-				});
-
-				console.log(currentShipPositions);
-
-				if (length === 3) {
-					let shipId = currentShip.id;
-					const shipCoordinates = [];
-
-					for (let i = 0; i < length; i++) {
-						if (direction === "horizontal") {
-							shipCoordinates.push([tileX, tileY + i]);
-						} else if (direction === "vertical") {
-							shipCoordinates.push([tileX + i, tileY]);
-						}
-					}
-
-					if (shipId === "ship3-1") {
-						const previousPosition = this.playerOne.ships[1].position;
-
-						if (previousPosition.length > 0) {
-							for (let i = 0; i < previousPosition.length; i++) {
-								this.playerOne.playerBoard.board[
-									this.playerOne.ships[1].position[i][0]
-								][this.playerOne.ships[1].position[i][1]] = "-";
-							}
-						}
-
-						if (
-							this.currentShipPositionChecker(
-								currentShipPositions,
-								shipCoordinates,
-								length
-							)
-						) {
-							this.playerOne.ships[1].position = {
-								x: tileX,
-								y: tileY,
-								dir: direction,
-							};
-						}
-					} else {
-						const previousPosition = this.playerOne.ships[2].position;
-
-						if (previousPosition.length > 0) {
-							for (let i = 0; i < previousPosition.length; i++) {
-								this.playerOne.playerBoard.board[
-									this.playerOne.ships[2].position[i][0]
-								][this.playerOne.ships[2].position[i][1]] = "-";
-							}
-						}
-
-						this.playerOne.ships[2].position = {
-							x: tileX,
-							y: tileY,
-							dir: direction,
-						};
-					}
-				}
-
-				this.playerOne.ships.forEach((ship) => {
-					if (length !== 3 && length === ship.length) {
-						const previousPosition = ship.position;
-
-						if (previousPosition.length > 0) {
-							for (let i = 0; i < previousPosition.length; i++) {
-								this.playerOne.playerBoard.board[ship.position[i][0]][
-									ship.position[i][1]
-								] = "-";
-							}
-						}
-
-						ship.position = {
-							x: tileX,
-							y: tileY,
-							dir: direction,
-						};
-					}
-				});
-
-				console.log(this.playerOne.ships);
-				this.updateBoard(this.playerOne);
+				const xCoord = Number(tile.dataset.x);
+				const yCoord = Number(tile.dataset.y);
 			});
 		});
-	}
-
-	static currentShipPositionChecker(allPositions, coordinates, length) {
-		for (let i = 0; i < length; i++) {
-			if (allPositions.includes(coordinates[i])) {
-				return false;
-			}
-		}
-
-		return true;
 	}
 
 	static loadButtonSelection() {
@@ -233,12 +131,6 @@ class UI {
 		}
 
 		this.boardCtn.appendChild(board);
-	}
-
-	static updateBoard(player) {
-		const boardTiles = document.querySelectorAll(`.${player.name}-tile`);
-		player.updateBoardState();
-		console.log(player.playerBoard.board);
 	}
 
 	static getShipSelectionLength() {
