@@ -25,6 +25,10 @@ class Player {
 		});
 	}
 
+	checkValidShipPlacement(newPosition) {
+		console.log(newPosition);
+	}
+
 	makeAttack(x, y, otherPlayer) {
 		otherPlayer.playerBoard.receiveAttack(x, y);
 		otherPlayer.ships.map((ship) => {

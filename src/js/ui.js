@@ -33,48 +33,59 @@ class UI {
 				const yCoord = Number(tile.dataset.y);
 				const direction = this.getShipDirection();
 				const length = this.getShipSelectionLength();
-				console.log(tile.id);
+				const newShipPosition = [];
 
-				switch (length) {
-					// if any ship other than size 3 are selected, will set position
-					case 2:
-					case 4:
-					case 5:
-						this.playerOne.ships.forEach((ship) => {
-							if (ship.length === length) {
-								ship.position = {
+				for (let i = 0; i < length; i++) {
+					if (direction === "horizontal") {
+						newShipPosition.push([xCoord, yCoord + i]);
+					} else if (direction === "vertical") {
+						newShipPosition.push([xCoord + i, yCoord]);
+					}
+				}
+
+				if (this.playerOne.checkValidShipPlacement(newShipPosition)) {
+					switch (length) {
+						// if any ship other than size 3 are selected, will set position
+						case 2:
+						case 4:
+						case 5:
+							this.playerOne.ships.forEach((ship) => {
+								if (ship.length === length) {
+									ship.position = {
+										x: xCoord,
+										y: yCoord,
+										dir: direction,
+									};
+									ship.isSet = true;
+								}
+							});
+							break;
+
+						// if either of the size 3 ships are selected, will set positon of the selected one
+						case 3:
+							const ship = document.querySelector(".active-placement");
+
+							if (ship.id === "ship3-1") {
+								this.playerOne.ships[1].position = {
 									x: xCoord,
 									y: yCoord,
 									dir: direction,
 								};
-								ship.isSet = true;
+								this.playerOne.ships[1].isSet = true;
+							} else if (ship.id === "ship3-2") {
+								this.playerOne.ships[2].position = {
+									x: xCoord,
+									y: yCoord,
+									dir: direction,
+								};
+								this.playerOne.ships[2].isSet = true;
 							}
-						});
-						break;
+							break;
+					}
 
-					// if either of the size 3 ships are selected, will set positon of the selected one
-					case 3:
-						const ship = document.querySelector(".active-placement");
-
-						if (ship.id === "ship3-1") {
-							this.playerOne.ships[1].position = {
-								x: xCoord,
-								y: yCoord,
-								dir: direction,
-							};
-							this.playerOne.ships[1].isSet = true;
-						} else if (ship.id === "ship3-2") {
-							this.playerOne.ships[2].position = {
-								x: xCoord,
-								y: yCoord,
-								dir: direction,
-							};
-							this.playerOne.ships[2].isSet = true;
-						}
-						break;
+					this.playerOne.updateBoardState();
+					console.log(this.playerOne.playerBoard.board);
 				}
-
-				console.table(this.playerOne.ships);
 			});
 		});
 	}
