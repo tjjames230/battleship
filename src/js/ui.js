@@ -31,6 +31,50 @@ class UI {
 			tile.addEventListener("click", () => {
 				const xCoord = Number(tile.dataset.x);
 				const yCoord = Number(tile.dataset.y);
+				const direction = this.getShipDirection();
+				const length = this.getShipSelectionLength();
+				console.log(tile.id);
+
+				switch (length) {
+					// if any ship other than size 3 are selected, will set position
+					case 2:
+					case 4:
+					case 5:
+						this.playerOne.ships.forEach((ship) => {
+							if (ship.length === length) {
+								ship.position = {
+									x: xCoord,
+									y: yCoord,
+									dir: direction,
+								};
+								ship.isSet = true;
+							}
+						});
+						break;
+
+					// if either of the size 3 ships are selected, will set positon of the selected one
+					case 3:
+						const ship = document.querySelector(".active-placement");
+
+						if (ship.id === "ship3-1") {
+							this.playerOne.ships[1].position = {
+								x: xCoord,
+								y: yCoord,
+								dir: direction,
+							};
+							this.playerOne.ships[1].isSet = true;
+						} else if (ship.id === "ship3-2") {
+							this.playerOne.ships[2].position = {
+								x: xCoord,
+								y: yCoord,
+								dir: direction,
+							};
+							this.playerOne.ships[2].isSet = true;
+						}
+						break;
+				}
+
+				console.table(this.playerOne.ships);
 			});
 		});
 	}
