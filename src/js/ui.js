@@ -106,8 +106,17 @@ class UI {
 					this.playerOne.updateBoardState(oldShipPosition);
 					console.log(this.playerOne.playerBoard.board);
 				}
+
+				// add the end of click event, see if all ships are set
+				// if so, loadConfirmationMenu
 			});
 		});
+	}
+
+	static loadConfirmationMenu() {
+		// load menu
+		// if ready - run function that loads both boards to play
+		// if not ready - run function to reset placement
 	}
 
 	static loadButtonSelection() {
