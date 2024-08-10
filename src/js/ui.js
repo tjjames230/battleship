@@ -34,7 +34,9 @@ class UI {
 				const direction = this.getShipDirection();
 				const length = this.getShipSelectionLength();
 				const newShipPosition = [];
+				const oldShipPosition = [];
 
+				// putting the new coordinates in an array
 				for (let i = 0; i < length; i++) {
 					if (direction === "horizontal") {
 						newShipPosition.push([xCoord, yCoord + i]);
@@ -51,6 +53,12 @@ class UI {
 						case 5:
 							this.playerOne.ships.forEach((ship) => {
 								if (ship.length === length) {
+									if (ship.position.length > 0) {
+										ship.position.forEach((coordinate) =>
+											oldShipPosition.push(coordinate)
+										);
+									}
+
 									ship.position = {
 										x: xCoord,
 										y: yCoord,
@@ -66,6 +74,12 @@ class UI {
 							const ship = document.querySelector(".active-placement");
 
 							if (ship.id === "ship3-1") {
+								if (this.playerOne.ships[1].position.length > 0) {
+									this.playerOne.ships[1].position.forEach((coordinate) =>
+										oldShipPosition.push(coordinate)
+									);
+								}
+
 								this.playerOne.ships[1].position = {
 									x: xCoord,
 									y: yCoord,
@@ -73,6 +87,12 @@ class UI {
 								};
 								this.playerOne.ships[1].isSet = true;
 							} else if (ship.id === "ship3-2") {
+								if (this.playerOne.ships[2].position.length > 0) {
+									this.playerOne.ships[2].position.forEach((coordinate) =>
+										oldShipPosition.push(coordinate)
+									);
+								}
+
 								this.playerOne.ships[2].position = {
 									x: xCoord,
 									y: yCoord,
@@ -83,7 +103,7 @@ class UI {
 							break;
 					}
 
-					this.playerOne.updateBoardState();
+					this.playerOne.updateBoardState(oldShipPosition);
 					console.log(this.playerOne.playerBoard.board);
 				}
 			});

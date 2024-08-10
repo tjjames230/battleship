@@ -14,7 +14,16 @@ class Player {
 		return shipSizes.map((size) => new Ship(size));
 	}
 
-	updateBoardState() {
+	updateBoardState(previousCoords) {
+		// removing previous position from the board
+		if (previousCoords.length > 0) {
+			for (let i = 0; i < previousCoords.length; i++) {
+				this.playerBoard.board[previousCoords[i][0]][previousCoords[i][1]] =
+					"-";
+			}
+		}
+
+		// updating the board with the new position
 		this.ships.forEach((ship) => {
 			if (ship.position.length > 0) {
 				for (let i = 0; i < ship.position.length; i++) {
@@ -26,7 +35,15 @@ class Player {
 	}
 
 	checkValidShipPlacement(newPosition) {
-		console.log(newPosition);
+		for (let i = 0; i < newPosition.length; i++) {
+			if (
+				this.playerBoard.board[newPosition[i][0]][newPosition[i][1]] === "A"
+			) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	makeAttack(x, y, otherPlayer) {
