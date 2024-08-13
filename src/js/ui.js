@@ -104,13 +104,36 @@ class UI {
 					}
 
 					this.playerOne.updateBoardState(oldShipPosition);
-					console.log(this.playerOne.playerBoard.board);
+					this.updateTileStyling(
+						this.playerOne.playerBoard.board,
+						this.playerOne.name
+					);
 				}
 
 				// add the end of click event, see if all ships are set
 				// if so, loadConfirmationMenu
 			});
 		});
+	}
+
+	// this will run after board is updated to reset styles for all tiles and then apply only to tiles that have been selected
+	static updateTileStyling(board, player) {
+		let tiles;
+
+		if (player === "p1") {
+			tiles = Array.from(document.querySelectorAll(".p1-tile"));
+		} else {
+			tiles = Array.from(document.querySelectorAll(".p2-tile"));
+		}
+
+		console.log(tiles);
+
+		// for (let i = 0; i < board.length; i++) {
+		// 	for (let j = 0; j < board[i].length; j++) {
+		// 		if (board[i][j] === "A") {
+		// 		}
+		// 	}
+		// }
 	}
 
 	static loadConfirmationMenu() {
