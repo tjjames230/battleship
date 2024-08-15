@@ -126,14 +126,18 @@ class UI {
 			tiles = Array.from(document.querySelectorAll(".p2-tile"));
 		}
 
-		console.log(tiles);
+		tiles.forEach((tile) => {
+			tile.classList.remove("ship-placed");
+		});
 
-		// for (let i = 0; i < board.length; i++) {
-		// 	for (let j = 0; j < board[i].length; j++) {
-		// 		if (board[i][j] === "A") {
-		// 		}
-		// 	}
-		// }
+		for (let i = 0; i < board.length; i++) {
+			for (let j = 0; j < board[i].length; j++) {
+				if (board[i][j] === "A") {
+					const tile = tiles[Number("" + i + j)];
+					tile.classList.add("ship-placed");
+				}
+			}
+		}
 	}
 
 	static loadConfirmationMenu() {
