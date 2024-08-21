@@ -111,9 +111,15 @@ class UI {
 				}
 
 				// add the end of click event, see if all ships are set
-				// if so, loadConfirmationMenu
+				if (this.checkAllShipsPlaced(this.playerOne.ships)) {
+					console.log("hi");
+				}
 			});
 		});
+	}
+
+	static checkAllShipsPlaced(arr) {
+		return arr.every((ship) => ship.isSet === true);
 	}
 
 	// this will run after board is updated to reset styles for all tiles and then apply only to tiles that have been selected
