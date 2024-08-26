@@ -34,6 +34,7 @@ class UI {
 			this.playerOne.playerBoard.board,
 			this.playerOne.name
 		);
+		this.loadAttackEventListener();
 	}
 
 	static shipPlacementClick() {
@@ -407,6 +408,25 @@ class UI {
 						}
 					}
 				}
+			});
+		});
+	}
+
+	static loadAttackEventListener() {
+		const tiles = Array.from(document.querySelectorAll(".p2-tile"));
+
+		tiles.forEach((tile) => {
+			// will need to add if statement that checks if tile already has "hit" or "miss" class added so it doesn't apply the hover class
+			tile.addEventListener("mouseover", () => {
+				tile.classList.add("direct-hover");
+			});
+
+			tile.addEventListener("mouseleave", () => {
+				tile.classList.remove("direct-hover");
+			});
+
+			tile.addEventListener("click", () => {
+				console.log(tile);
 			});
 		});
 	}
