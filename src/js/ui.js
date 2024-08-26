@@ -20,17 +20,20 @@ class UI {
 		this.shipPlacementHover();
 		this.getShipDirection();
 		this.shipPlacementClick();
-		console.log(this.playerOne);
 	}
 
 	static loadBattle() {
 		this.body.innerHTML = "";
 		this.boardCtn.innerHTML = "";
-		this.loadHeader("setup");
+		this.loadHeader("p1");
 		this.boardCtn.id = "gameboard-ctn";
 		this.displayShipPlacementBoard(this.playerOne);
 		this.displayShipPlacementBoard(this.playerTwo);
 		this.body.appendChild(this.boardCtn);
+		this.updateTileStyling(
+			this.playerOne.playerBoard.board,
+			this.playerOne.name
+		);
 	}
 
 	static shipPlacementClick() {
@@ -178,7 +181,7 @@ class UI {
 
 		yesBtn.addEventListener("click", () => {
 			// load both boards to play the game
-			console.log("yes");
+			this.loadBattle();
 		});
 
 		noBtn.addEventListener("click", () => {
@@ -262,8 +265,8 @@ class UI {
 
 		if (page === "setup") {
 			h1.innerText = "Place your ships";
-		} else {
-			h1.innerText = "Error";
+		} else if (page === "p1") {
+			h1.innerText = "Player One, make your move.";
 		}
 
 		this.body.appendChild(h1);
