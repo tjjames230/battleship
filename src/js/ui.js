@@ -112,7 +112,7 @@ class UI {
 
 				// add the end of click event, see if all ships are set
 				if (this.checkAllShipsPlaced(this.playerOne.ships)) {
-					console.log("hi");
+					this.loadConfirmationMenu();
 				}
 			});
 		});
@@ -147,9 +147,21 @@ class UI {
 	}
 
 	static loadConfirmationMenu() {
-		// load menu
-		// if ready - run function that loads both boards to play
-		// if not ready - run function to reset placement
+		const menubg = document.querySelector("#confirmation-menu-bg");
+		menubg.style.display = "flex";
+
+		const yesBtn = document.querySelector("#confirmation-yes");
+		const noBtn = document.querySelector("#confirmation-no");
+
+		yesBtn.addEventListener("click", () => {
+			// load both boards to play the game
+			console.log("yes");
+		});
+
+		noBtn.addEventListener("click", () => {
+			// reload board to set ship positions
+			console.log("no");
+		});
 	}
 
 	static loadButtonSelection() {
