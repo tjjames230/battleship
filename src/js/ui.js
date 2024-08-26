@@ -8,6 +8,8 @@ class UI {
 	static boardCtn = document.createElement("main");
 
 	static loadSetup() {
+		this.body.innerHTML = "";
+		this.addConfirmationMenu();
 		this.loadHeader("setup");
 		this.boardCtn.id = "gameboard-ctn";
 		this.loadButtonSelection();
@@ -19,10 +21,13 @@ class UI {
 		this.shipPlacementClick();
 	}
 
-	static clearBoard(player) {
-		// need to clear board, might need to add ID's to specific player gameboard in order to clear?
-		const board = document.querySelector();
-		player.playerBoard.resetBoard();
+	static loadBattle() {
+		this.body.innerHTML = "";
+		this.loadHeader("setup");
+		this.boardCtn.id = "gameboard-ctn";
+		this.displayShipPlacementBoard(this.playerOne);
+		this.displayShipPlacementBoard(this.playerTwo);
+		this.body.appendChild(this.boardCtn);
 	}
 
 	static shipPlacementClick() {
@@ -144,6 +149,21 @@ class UI {
 				}
 			}
 		}
+	}
+
+	static addConfirmationMenu() {
+		this.body.innerHTML = `
+		<div id="confirmation-menu-bg">
+			<div id="confirmation-menu">
+				<p>All ships have been placed.</p>
+				<h3>Continue?</h3>
+				<div id="confirmation-btns">
+					<button id="confirmation-yes">Yes</button>
+					<button id="confirmation-no">No</button>
+				</div>
+			</div>
+		</div>
+		`;
 	}
 
 	static loadConfirmationMenu() {
