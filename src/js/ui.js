@@ -9,6 +9,7 @@ class UI {
 
 	static loadSetup() {
 		this.body.innerHTML = "";
+		this.boardCtn.innerHTML = "";
 		this.addConfirmationMenu();
 		this.loadHeader("setup");
 		this.boardCtn.id = "gameboard-ctn";
@@ -19,10 +20,12 @@ class UI {
 		this.shipPlacementHover();
 		this.getShipDirection();
 		this.shipPlacementClick();
+		console.log(this.playerOne);
 	}
 
 	static loadBattle() {
 		this.body.innerHTML = "";
+		this.boardCtn.innerHTML = "";
 		this.loadHeader("setup");
 		this.boardCtn.id = "gameboard-ctn";
 		this.displayShipPlacementBoard(this.playerOne);
@@ -180,7 +183,8 @@ class UI {
 
 		noBtn.addEventListener("click", () => {
 			// reload board to set ship positions
-			console.log("no");
+			this.playerOne.clear();
+			this.loadSetup();
 		});
 	}
 

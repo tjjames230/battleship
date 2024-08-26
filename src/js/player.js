@@ -61,6 +61,11 @@ class Player {
 			this.turn = true;
 		}
 	}
+
+	clear() {
+		this.ships = this.initializieShips();
+		this.playerBoard = new Gameboard();
+	}
 }
 
 module.exports = { Player };
