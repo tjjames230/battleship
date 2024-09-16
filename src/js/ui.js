@@ -412,6 +412,20 @@ class UI {
 		});
 	}
 
+	static setPlayerTwoShips() {
+		// will set to true when all ships have been properly placed
+		let shipsPlaced = false;
+
+		// this.playerTwo.ships.forEach(ship => {
+
+		// })
+		let x = Math.floor(Math.random() * 10);
+		let y = Math.floor(Math.random() * 10);
+		let direction =
+			Math.floor(Math.random() * 2) === 0 ? "Vertical" : "Horizontal";
+		console.log(direction);
+	}
+
 	static loadAttackEventListener() {
 		const tiles = Array.from(document.querySelectorAll(".p2-tile"));
 
@@ -426,7 +440,9 @@ class UI {
 			});
 
 			tile.addEventListener("click", () => {
-				console.log(tile);
+				const xCoord = Number(tile.dataset.x);
+				const yCoord = Number(tile.dataset.y);
+				this.setPlayerTwoShips();
 			});
 		});
 	}
