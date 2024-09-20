@@ -27,6 +27,7 @@ class UI {
 		this.boardCtn.innerHTML = "";
 		this.loadHeader("p1");
 		this.boardCtn.id = "gameboard-ctn";
+		this.setPlayerTwoShips();
 		this.displayShipPlacementBoard(this.playerOne);
 		this.displayShipPlacementBoard(this.playerTwo);
 		this.body.appendChild(this.boardCtn);
@@ -416,14 +417,29 @@ class UI {
 		// will set to true when all ships have been properly placed
 		let shipsPlaced = false;
 
-		// this.playerTwo.ships.forEach(ship => {
+		for (let i = 0; i < this.playerTwo.ships.length; i++) {
+			let ship = this.playerTwo.ships[i];
 
-		// })
-		let x = Math.floor(Math.random() * 10);
-		let y = Math.floor(Math.random() * 10);
-		let direction =
-			Math.floor(Math.random() * 2) === 0 ? "Vertical" : "Horizontal";
-		console.log(direction);
+			while (ship.position.length === 0) {
+				// randomly getting the x coordinate
+				let xCoord = Math.floor(Math.random() * 10);
+
+				// randomly getting the y coordinate
+				let yCoord = Math.floor(Math.random() * 10);
+
+				// randomly getting the direction
+				let direction =
+					Math.floor(Math.random() * 2) === 0 ? "vertical" : "horizontal";
+
+				ship.position = {
+					x: xCoord,
+					y: yCoord,
+					dir: direction,
+				};
+			}
+		}
+
+		console.log(this.playerTwo);
 	}
 
 	static loadAttackEventListener() {
@@ -442,7 +458,6 @@ class UI {
 			tile.addEventListener("click", () => {
 				const xCoord = Number(tile.dataset.x);
 				const yCoord = Number(tile.dataset.y);
-				this.setPlayerTwoShips();
 			});
 		});
 	}
