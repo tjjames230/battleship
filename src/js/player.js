@@ -36,6 +36,10 @@ class Player {
 
 	checkValidShipPlacement(newPosition) {
 		for (let i = 0; i < newPosition.length; i++) {
+			if (newPosition[i][0] > 9 || newPosition[i][1] > 9) {
+				return false;
+			}
+
 			if (
 				this.playerBoard.board[newPosition[i][0]][newPosition[i][1]] === "A"
 			) {
