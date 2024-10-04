@@ -14,7 +14,7 @@ class Player {
 		return shipSizes.map((size) => new Ship(size));
 	}
 
-	updateBoardState(previousCoords) {
+	updateBoardState(previousCoords = []) {
 		// removing previous position from the board
 		if (previousCoords.length > 0) {
 			for (let i = 0; i < previousCoords.length; i++) {

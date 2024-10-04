@@ -439,7 +439,8 @@ class UI {
 			}
 		}
 
-		console.log(this.playerTwo);
+		this.playerTwo.updateBoardState();
+		console.log(this.playerTwo.playerBoard.board);
 	}
 
 	static loadAttackEventListener() {
