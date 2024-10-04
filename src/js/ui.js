@@ -414,13 +414,12 @@ class UI {
 	}
 
 	static setPlayerTwoShips() {
-		// will set to true when all ships have been properly placed
-		let shipsPlaced = false;
-
 		for (let i = 0; i < this.playerTwo.ships.length; i++) {
-			let ship = this.playerTwo.ships[i];
+			const ship = this.playerTwo.ships[i];
 
 			while (ship.position.length === 0) {
+				const newShipPosition = [];
+
 				// randomly getting the x coordinate
 				let xCoord = Math.floor(Math.random() * 10);
 
@@ -431,16 +430,28 @@ class UI {
 				let direction =
 					Math.floor(Math.random() * 2) === 0 ? "vertical" : "horizontal";
 
-				ship.position = {
-					x: xCoord,
-					y: yCoord,
-					dir: direction,
-				};
-			}
-		}
+				for (let i = 0; i < ship.length; i++) {
+					if (direction === "horizontal") {
+						newShipPosition.push([xCoord, yCoord + i]);
+					} else if (direction === "vertical") {
+						newShipPosition.push([xCoord + i, yCoord]);
+					}
+				}
 
-		this.playerTwo.updateBoardState();
-		console.log(this.playerTwo.playerBoard.board);
+				console.log(newShipPosition);
+
+				if (this.playerTwo.checkValidShipPlacement(newShipPosition)) {
+					ship.position = {
+						x: xCoord,
+						y: yCoord,
+						dir: direction,
+					};
+				}
+			}
+
+			this.playerTwo.updateBoardState();
+		}
+		console.log(this.playerTwo);
 	}
 
 	static loadAttackEventListener() {
