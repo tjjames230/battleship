@@ -151,9 +151,15 @@ class UI {
 
 		for (let i = 0; i < board.length; i++) {
 			for (let j = 0; j < board[i].length; j++) {
-				if (board[i][j] === "A") {
+				if (player !== "p2" && board[i][j] === "A") {
 					const tile = tiles[Number("" + i + j)];
 					tile.classList.add("ship-placed");
+				} else if (board[i][j] === "X") {
+					const tile = tiles[Number("" + i + j)];
+					tile.classList.add("hit");
+				} else if (board[i][j] === "O") {
+					const tile = tiles[Number("" + i + j)];
+					tile.classList.add("miss");
 				}
 			}
 		}
@@ -446,6 +452,8 @@ class UI {
 						y: yCoord,
 						dir: direction,
 					};
+
+					ship.isSet = true;
 				}
 			}
 
@@ -470,6 +478,18 @@ class UI {
 			tile.addEventListener("click", () => {
 				const xCoord = Number(tile.dataset.x);
 				const yCoord = Number(tile.dataset.y);
+				const p2Board = this.playerTwo.playerBoard.board;
+
+				// updating p2 board state
+				this.playerTwo.playerBoard.receiveAttack(xCoord, yCoord);
+
+				// updating p2 board UI
+				this.updateTileStyling(
+					this.playerTwo.playerBoard.board,
+					this.playerTwo.name
+				);
+
+				console.log(p2Board);
 			});
 		});
 	}
