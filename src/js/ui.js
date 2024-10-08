@@ -476,21 +476,45 @@ class UI {
 			});
 
 			tile.addEventListener("click", () => {
-				const xCoord = Number(tile.dataset.x);
-				const yCoord = Number(tile.dataset.y);
-				const p2Board = this.playerTwo.playerBoard.board;
+				if (
+					!tile.classList.contains("hit") &&
+					!tile.classList.contains("miss")
+				) {
+					const xCoord = Number(tile.dataset.x);
+					const yCoord = Number(tile.dataset.y);
 
-				// updating p2 board state
-				this.playerTwo.playerBoard.receiveAttack(xCoord, yCoord);
+					// updating p2 board state
+					this.playerTwo.playerBoard.receiveAttack(xCoord, yCoord);
 
-				// updating p2 board UI
-				this.updateTileStyling(
-					this.playerTwo.playerBoard.board,
-					this.playerTwo.name
-				);
+					// updating p2 board UI
+					this.updateTileStyling(
+						this.playerTwo.playerBoard.board,
+						this.playerTwo.name
+					);
 
-				console.log(p2Board);
+					// after each turn, playerTwo will randomly select a tile
+					this.playerTwoAttack();
+				}
 			});
 		});
+	}
+
+	static playerTwoAttack() {
+		// randomly getting the x coordinate
+		let xCoord = Math.floor(Math.random() * 10);
+
+		// randomly getting the y coordinate
+		let yCoord = Math.floor(Math.random() * 10);
+
+		this.playerOne.playerBoard.receiveAttack(xCoord, yCoord);
+
+		this.updateTileStyling(
+			this.playerOne.playerBoard.board,
+			this.playerOne.name
+		);
+
+		// let correctAttack = false;
+		// while (!correctAttack) {
+		// }
 	}
 }
