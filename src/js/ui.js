@@ -1,9 +1,11 @@
 export { UI };
 import { Player } from "./player";
+import { GameController } from "./controller";
 
 class UI {
-	static playerOne = new Player("p1", true);
-	static playerTwo = new Player("p2", false);
+	static playerOne = new Player("p1");
+	static playerTwo = new Player("p2");
+	static controller = new GameController();
 	static body = document.querySelector("body");
 	static boardCtn = document.createElement("main");
 
@@ -487,30 +489,8 @@ class UI {
 
 					tile.classList.remove("direct-hover");
 
-					// update ps ships state
-					let hitStatus = this.playerTwo.ships.some((ship) => {
-						let hitResult = ship.hit(xCoord, yCoord);
-						let sink = ship.isSunk();
-
-						if (hitResult) {
-							if (sink) {
-								const h1 = document.querySelector("h1");
-								h1.innerText = "Player One: Hit & Sunk";
-							} else {
-								const h1 = document.querySelector("h1");
-								h1.innerText = "Player One: Hit";
-							}
-
-							return true;
-						}
-
-						return false;
-					});
-
-					if (!hitStatus) {
-						const h1 = document.querySelector("h1");
-						h1.innerText = "Player One: Miss";
-					}
+					// update p2 ships state
+					this.attack(xCoord, yCoord, this.playerTwo);
 
 					// update p2 board state
 					this.playerTwo.playerBoard.receiveAttack(xCoord, yCoord);
@@ -523,11 +503,56 @@ class UI {
 
 					// after each turn, playerTwo will randomly select a tile
 					this.playerTwoAttack();
-
-					console.log(this.playerTwo.ships);
 				}
 			});
 		});
+	}
+
+	static attack(x, y, player) {
+		let hitStatus = player.ships.some((ship) => {
+			let hitResult = ship.hit(x, y);
+			let sink = ship.isSunk();
+
+			if (hitResult && player.name === "p2") {
+				if (sink) {
+					const h1 = document.querySelector("h1");
+					h1.innerText = "Player One: Hit & Sink";
+				} else {
+					const h1 = document.querySelector("h1");
+					h1.innerText = "Player One: Hit";
+				}
+
+				return true;
+			}
+
+			if (hitResult && player.name === "p1") {
+				if (sink) {
+					const h1 = document.querySelector("h1");
+					h1.innerText += "  |  Player Two: Hit & Sink";
+				} else {
+					const h1 = document.querySelector("h1");
+					h1.innerText += "  |  Player Two: Hit";
+				}
+
+				return true;
+			}
+
+			return false;
+		});
+
+		if (!hitStatus && player.name === "p2") {
+			const h1 = document.querySelector("h1");
+			h1.innerText = "Player One: Miss";
+		}
+
+		if (!hitStatus && player.name === "p1") {
+			const h1 = document.querySelector("h1");
+			h1.innerText += "  |  Player Two: Miss";
+		}
+
+		if (this.controller.checkWinner(player)) {
+			this.loadGameOverMenu(player);
+		}
 	}
 
 	static playerTwoAttack() {
@@ -545,6 +570,8 @@ class UI {
 			) {
 				this.playerOne.playerBoard.receiveAttack(xCoord, yCoord);
 
+				this.attack(xCoord, yCoord, this.playerOne);
+
 				this.updateTileStyling(
 					this.playerOne.playerBoard.board,
 					this.playerOne.name
@@ -553,5 +580,28 @@ class UI {
 				correctAttack = true;
 			}
 		}
+	}
+
+	static loadGameOverMenu(winner) {
+		this.loadGameOverMenuContent(winner);
+	}
+
+	static loadGameOverMenuContent(winner) {
+		let winnerText = "";
+		if (winner.name === "p1") {
+			winnerText = "Player Two";
+		} else {
+			winnerText = "Player One";
+		}
+		const bg = document.createElement("div");
+		bg.id = "gameover-menu-bg";
+		bg.innerHTML = `
+			<div id="gameover-menu">
+				<h3>${winnerText} is the winner!</h3>
+				<button>Play Again</button>
+			</div>
+		`;
+
+		this.body.prepend(bg);
 	}
 }

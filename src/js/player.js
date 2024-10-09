@@ -2,11 +2,10 @@ const { Ship } = require("./ship");
 const { Gameboard } = require("./gameboard");
 
 class Player {
-	constructor(name, turn) {
+	constructor(name) {
 		this.name = name;
 		this.ships = this.initializieShips();
 		this.playerBoard = new Gameboard();
-		this.turn = turn;
 	}
 
 	initializieShips() {
@@ -55,15 +54,6 @@ class Player {
 		otherPlayer.ships.map((ship) => {
 			ship.hit(x, y);
 		});
-		this.updateTurn();
-	}
-
-	updateTurn() {
-		if (this.turn) {
-			this.turn = false;
-		} else {
-			this.turn = true;
-		}
 	}
 
 	clear() {

@@ -18,7 +18,6 @@ class GameController {
 
 		if (allShipsSunk) {
 			this.updateGameOver(true);
-			console.log(this.checkGameOver());
 			return this.checkGameOver();
 		} else {
 			return false;
