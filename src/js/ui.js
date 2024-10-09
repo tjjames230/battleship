@@ -468,7 +468,12 @@ class UI {
 		tiles.forEach((tile) => {
 			// will need to add if statement that checks if tile already has "hit" or "miss" class added so it doesn't apply the hover class
 			tile.addEventListener("mouseover", () => {
-				tile.classList.add("direct-hover");
+				if (
+					!tile.classList.contains("hit") &&
+					!tile.classList.contains("miss")
+				) {
+					tile.classList.add("direct-hover");
+				}
 			});
 
 			tile.addEventListener("mouseleave", () => {
@@ -482,6 +487,8 @@ class UI {
 				) {
 					const xCoord = Number(tile.dataset.x);
 					const yCoord = Number(tile.dataset.y);
+
+					tile.classList.remove("direct-hover");
 
 					// updating p2 board state
 					this.playerTwo.playerBoard.receiveAttack(xCoord, yCoord);
