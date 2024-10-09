@@ -584,6 +584,7 @@ class UI {
 
 	static loadGameOverMenu(winner) {
 		this.loadGameOverMenuContent(winner);
+		this.loadGameOverEventListener();
 	}
 
 	static loadGameOverMenuContent(winner) {
@@ -598,10 +599,19 @@ class UI {
 		bg.innerHTML = `
 			<div id="gameover-menu">
 				<h3>${winnerText} is the winner!</h3>
-				<button>Play Again</button>
+				<button id="play-again-btn">Play Again</button>
 			</div>
 		`;
 
 		this.body.prepend(bg);
+	}
+
+	static loadGameOverEventListener() {
+		const playBtn = document.querySelector("#play-again-btn");
+		playBtn.addEventListener("click", () => {
+			this.loadSetup();
+			this.playerOne.clear();
+			this.playerTwo.clear();
+		});
 	}
 }
