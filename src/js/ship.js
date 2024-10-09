@@ -11,7 +11,6 @@ class Ship {
 		for (let i = 0; i < this._position.length; i++) {
 			if (x == this._position[i][0] && y == this._position[i][1]) {
 				this._numberHit++;
-				this._position[i] = [];
 				return true;
 			}
 		}
@@ -26,6 +25,8 @@ class Ship {
 	isSunk() {
 		if (this.length === this._numberHit) {
 			return true;
+		} else {
+			return false;
 		}
 	}
 

@@ -444,8 +444,6 @@ class UI {
 					}
 				}
 
-				console.log(newShipPosition);
-
 				if (this.playerTwo.checkValidShipPlacement(newShipPosition)) {
 					ship.position = {
 						x: xCoord,
@@ -459,7 +457,6 @@ class UI {
 
 			this.playerTwo.updateBoardState();
 		}
-		console.log(this.playerTwo);
 	}
 
 	static loadAttackEventListener() {
@@ -490,10 +487,35 @@ class UI {
 
 					tile.classList.remove("direct-hover");
 
-					// updating p2 board state
+					// update ps ships state
+					let hitStatus = this.playerTwo.ships.some((ship) => {
+						let hitResult = ship.hit(xCoord, yCoord);
+						let sink = ship.isSunk();
+
+						if (hitResult) {
+							if (sink) {
+								const h1 = document.querySelector("h1");
+								h1.innerText = "Player One: Hit & Sunk";
+							} else {
+								const h1 = document.querySelector("h1");
+								h1.innerText = "Player One: Hit";
+							}
+
+							return true;
+						}
+
+						return false;
+					});
+
+					if (!hitStatus) {
+						const h1 = document.querySelector("h1");
+						h1.innerText = "Player One: Miss";
+					}
+
+					// update p2 board state
 					this.playerTwo.playerBoard.receiveAttack(xCoord, yCoord);
 
-					// updating p2 board UI
+					// update p2 board UI
 					this.updateTileStyling(
 						this.playerTwo.playerBoard.board,
 						this.playerTwo.name
@@ -501,27 +523,35 @@ class UI {
 
 					// after each turn, playerTwo will randomly select a tile
 					this.playerTwoAttack();
+
+					console.log(this.playerTwo.ships);
 				}
 			});
 		});
 	}
 
 	static playerTwoAttack() {
-		// randomly getting the x coordinate
-		let xCoord = Math.floor(Math.random() * 10);
+		let correctAttack = false;
+		while (!correctAttack) {
+			// randomly getting the x coordinate
+			let xCoord = Math.floor(Math.random() * 10);
 
-		// randomly getting the y coordinate
-		let yCoord = Math.floor(Math.random() * 10);
+			// randomly getting the y coordinate
+			let yCoord = Math.floor(Math.random() * 10);
 
-		this.playerOne.playerBoard.receiveAttack(xCoord, yCoord);
+			if (
+				this.playerOne.playerBoard.board[xCoord][yCoord] == "-" ||
+				this.playerOne.playerBoard.board[xCoord][yCoord] == "A"
+			) {
+				this.playerOne.playerBoard.receiveAttack(xCoord, yCoord);
 
-		this.updateTileStyling(
-			this.playerOne.playerBoard.board,
-			this.playerOne.name
-		);
+				this.updateTileStyling(
+					this.playerOne.playerBoard.board,
+					this.playerOne.name
+				);
 
-		// let correctAttack = false;
-		// while (!correctAttack) {
-		// }
+				correctAttack = true;
+			}
+		}
 	}
 }
