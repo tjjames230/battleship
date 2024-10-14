@@ -34,30 +34,35 @@
 
 	.p1-tile,
 	.p2-tile {
-		background-color: blue;
+		background-color: $clr-gray;
 		max-width: 100%;
 		width: rem(32);
 		height: rem(32);
+		border-radius: rem(2);
 	}
 
 	.direct-hover {
-		background-color: green;
+		background-color: $clr-hover;
 		cursor: pointer;
 	}
 
 	.indirect-hover {
-		background-color: lightgreen;
+		background-color: $clr-hover;
 	}
 
 	.ship-placed {
-		background-color: red;
+		background-color: $clr-placed;
 	}
 
 	.hit {
-		background-color: #000;
+		background-color: $clr-hit;
 	}
 
 	.miss {
-		background-color: aqua;
+		background-color: $clr-miss;
+	}
+
+	.sunk {
+		background-color: $clr-black;
 	}
 }
